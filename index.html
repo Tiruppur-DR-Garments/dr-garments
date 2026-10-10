@@ -22,10 +22,13 @@ function initCard(card,i){
  try {
    const im=new Image(); im.src=arr[0].src;
    awaitImage(im).then(()=>{
-     if(im.naturalWidth/im.naturalHeight>=1.35 && !localStorage.getItem(key(i))){
+     if(!localStorage.getItem(key(i))){
        const ratio=im.naturalWidth/im.naturalHeight;
-       if(ratio>=1.35){
-         const pieces=Math.min(5,Math.max(2,Math.round(ratio/0.34)));
+       // CODE 502 currently has five side-by-side colours inside one portrait-ish collage.
+       // Split that one embedded collage into five separate vertical panels.
+       const isCode502 = card.querySelector('.num')?.textContent.trim() === 'CODE 502';
+       if((isCode502 && ratio>=0.65) || ratio>=1.35){
+         const pieces=isCode502 ? 5 : Math.min(5,Math.max(2,Math.round(ratio/0.34)));
          const cropped=[];
          for(let n=0;n<pieces;n++){
            const c=document.createElement('canvas');c.width=Math.floor(im.naturalWidth/pieces);c.height=im.naturalHeight;
