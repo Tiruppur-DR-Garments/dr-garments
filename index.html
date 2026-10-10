@@ -10,12 +10,33 @@
 const ADMIN_PIN='5050';let admin=false;
 const cards=[...document.querySelectorAll('article.product')];const mediaState=new Map();
 const key=i=>'drg_media_'+i, pkey=i=>'drg_price_'+i;
+function awaitImage(im){return new Promise((resolve,reject)=>{if(im.complete&&im.naturalWidth)return resolve();im.onload=()=>resolve();im.onerror=reject})}
 function priceEl(card){return [...card.querySelectorAll('.spec span')].find(x=>x.querySelector('b')?.textContent.trim().toLowerCase()==='price')}
 function priceNum(el){return (el?.textContent.match(/₹\s*([0-9]+)/)||[])[1]||''}
 function initCard(card,i){
  const box=card.querySelector('.photo'),counter=card.querySelector('.media-count');
  const initial=box.querySelector('.media-main'); if(!initial)return;
  let arr=[{type:'image',src:initial.getAttribute('src'),original:true}];
+ // If the embedded source is a horizontal colour-catalog collage, split it into individual panels.
+ // Keep all product text/prices/codes unchanged.
+ try {
+   const im=new Image(); im.src=arr[0].src;
+   awaitImage(im).then(()=>{
+     if(im.naturalWidth/im.naturalHeight>=1.35 && !localStorage.getItem(key(i))){
+       const ratio=im.naturalWidth/im.naturalHeight;
+       if(ratio>=1.35){
+         const pieces=Math.min(5,Math.max(2,Math.round(ratio/0.34)));
+         const cropped=[];
+         for(let n=0;n<pieces;n++){
+           const c=document.createElement('canvas');c.width=Math.floor(im.naturalWidth/pieces);c.height=im.naturalHeight;
+           const ctx=c.getContext('2d');ctx.drawImage(im,n*c.width,0,c.width,im.naturalHeight,0,0,c.width,c.height);
+           cropped.push({type:'image',src:c.toDataURL('image/jpeg',0.9),original:true});
+         }
+         arr.splice(0,1,...cropped);state.render();
+       }
+     }
+   }).catch(()=>{});
+ } catch(e){}
  try{const extra=JSON.parse(localStorage.getItem(key(i))||'[]');arr=arr.concat(extra.filter(x=>x&&x.src&&x.type))}catch(e){}
  let idx=0;const state={arr,render(){idx=(idx+arr.length)%arr.length;const old=box.querySelector('.media-main,video');if(old)old.remove();const item=arr[idx];let el;if(item.type==='video'){el=document.createElement('video');el.controls=true;el.playsInline=true;el.src=item.src}else{el=document.createElement('img');el.className='media-main';el.alt='Product photo';el.src=item.src}box.insertBefore(el,box.querySelector('.media-controls'));counter.textContent=(idx+1)+' / '+arr.length}};mediaState.set(i,state);
  box.querySelector('.media-prev')?.addEventListener('click',()=>{idx--;state.render()});box.querySelector('.media-next')?.addEventListener('click',()=>{idx++;state.render()});state.render();
