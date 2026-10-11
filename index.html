@@ -20,7 +20,8 @@
       --whatsapp: #25d366;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; }
+    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding-bottom: 4rem; }
+    
     header {
       background: rgba(24, 27, 36, 0.95);
       position: sticky;
@@ -30,7 +31,7 @@
       padding: 0.9rem 1.25rem;
     }
     .nav-container {
-      max-width: 1300px;
+      max-width: 900px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -57,54 +58,96 @@
       font-weight: 700;
       text-transform: uppercase;
     }
-    .hero { text-align: center; padding: 2rem 1rem 1rem; max-width: 800px; margin: 0 auto; }
-    .hero h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff; }
-    .hero p { color: var(--text-muted); font-size: 0.95rem; }
-    .container { max-width: 1300px; margin: 0 auto; padding: 1rem 1.25rem 4rem; }
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 1.75rem;
-    }
+
+    .hero { text-align: center; padding: 2rem 1rem 1.5rem; max-width: 800px; margin: 0 auto; }
+    .hero h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.4rem; color: #fff; }
+    .hero p { color: var(--text-muted); font-size: 0.92rem; }
+
+    .container { max-width: 520px; margin: 0 auto; padding: 0 1rem; }
+
+    /* Single Product Card */
     .card {
       background: var(--surface-card);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
     }
-    .img-box {
+    .slider-container {
+      position: relative;
       width: 100%;
-      height: 380px;
+      height: 480px;
       background: #000;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
-    .img-box img {
+    .slide-item {
+      display: none;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      align-items: center;
+      justify-content: center;
     }
-    .card-body { padding: 1.1rem; display: flex; flex-direction: column; flex-grow: 1; gap: 0.6rem; }
+    .slide-item.active { display: flex; }
+    .slide-item img, .slide-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 17, 23, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      z-index: 5;
+    }
+    .slider-btn.prev { left: 10px; }
+    .slider-btn.next { right: 10px; }
+    .slide-counter {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-body { padding: 1.4rem; display: flex; flex-direction: column; gap: 0.8rem; }
     .code-badge {
       display: inline-block; align-self: flex-start;
       background: rgba(245, 158, 11, 0.15); color: var(--accent);
       border: 1px solid rgba(245, 158, 11, 0.4);
-      font-weight: 800; font-size: 0.78rem; padding: 0.2rem 0.55rem; border-radius: 6px;
+      font-weight: 800; font-size: 0.85rem; padding: 0.25rem 0.65rem; border-radius: 6px;
     }
-    .product-title { font-size: 1rem; font-weight: 700; color: #fff; }
+    .product-title { font-size: 1.25rem; font-weight: 700; color: #fff; line-height: 1.3; }
     .price-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.2rem; }
-    .price { font-size: 1.35rem; font-weight: 800; color: #4ade80; }
-    .moq { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
-    .specs-table { width: 100%; border-collapse: collapse; margin-top: 0.4rem; font-size: 0.8rem; }
-    .specs-table td { padding: 0.25rem 0; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-    .specs-table td:first-child { color: var(--text-muted); width: 32%; }
-    .specs-table td:last-child { color: #e2e8f0; font-weight: 600; }
+    .price { font-size: 1.5rem; font-weight: 800; color: #4ade80; }
+    .moq { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+    .specs-table { width: 100%; border-collapse: collapse; margin-top: 0.4rem; font-size: 0.88rem; }
+    .specs-table td { padding: 0.4rem 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .specs-table td:first-child { color: var(--text-muted); width: 35%; }
+    .specs-table td:last-child { color: #fff; font-weight: 600; }
+    
     .btn-enquiry {
-      margin-top: auto;
+      margin-top: 0.5rem;
       background: var(--whatsapp);
       color: #fff;
       text-decoration: none;
@@ -112,18 +155,40 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      padding: 0.65rem;
-      border-radius: 8px;
-      font-size: 0.88rem;
+      padding: 0.85rem;
+      border-radius: 10px;
+      font-size: 1rem;
       font-weight: 700;
     }
-    footer {
-      border-top: 1px solid var(--border);
+
+    /* Editable Settings Box */
+    .edit-box {
+      margin-top: 2rem;
       background: var(--surface);
-      text-align: center;
-      padding: 2rem 1rem;
-      color: var(--text-muted);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+    }
+    .edit-box h4 { color: var(--accent); font-size: 0.95rem; margin-bottom: 0.8rem; }
+    .edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .edit-grid input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 0.55rem;
+      border-radius: 6px;
       font-size: 0.82rem;
+    }
+    .btn-save-edit {
+      width: 100%;
+      margin-top: 0.75rem;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 0.65rem;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -144,113 +209,109 @@
 
   <div class="hero">
     <h2>Wholesale Product Catalogue</h2>
-    <p>Premium Quality Knitted Garments Direct from Tiruppur Factory. Export & Domestic Bulk Orders.</p>
+    <p>Premium Quality Knitted Garments Direct from Tiruppur Factory.</p>
   </div>
 
   <div class="container">
-    <div class="product-grid" id="catalogueGrid"></div>
+    <div class="card">
+      <!-- 5 Photos + 1 Video Slider -->
+      <div class="slider-container" id="productSlider">
+        <div class="slide-item active">
+          <img src="FB_IMG_1791544846969.jpg" onerror="this.src='./FB_IMG_1791544846969.jpg'" alt="Slide 1">
+        </div>
+        <div class="slide-item">
+          <img src="FB_IMG_1791544849680.jpg" onerror="this.src='./FB_IMG_1791544849680.jpg'" alt="Slide 2">
+        </div>
+        <div class="slide-item">
+          <img src="FB_IMG_1791544851819.jpg" onerror="this.src='./FB_IMG_1791544851819.jpg'" alt="Slide 3">
+        </div>
+        <div class="slide-item">
+          <img src="FB_IMG_1791544853695.jpg" onerror="this.src='./FB_IMG_1791544853695.jpg'" alt="Slide 4">
+        </div>
+        <div class="slide-item">
+          <img src="FB_IMG_1791544856267.jpg" onerror="this.src='./FB_IMG_1791544856267.jpg'" alt="Slide 5">
+        </div>
+        <div class="slide-item">
+          <video controls playsinline preload="metadata">
+            <source src="AhaConvert_1791545754_q5iYt87g89g8e6d0a790510daea67280.mp4" type="video/mp4">
+          </video>
+        </div>
+        <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
+        <div class="slide-counter" id="slideCount">1 / 6</div>
+      </div>
+
+      <div class="card-body">
+        <span class="code-badge" id="dispCode">Code: 501</span>
+        <h3 class="product-title" id="dispTitle">Ladies Nightwear Set – Top + Pant</h3>
+        <div class="price-row">
+          <span class="price" id="dispPrice">₹215 / Piece</span>
+          <span class="moq" id="dispMoq">Min Order: 100 Pieces</span>
+        </div>
+        <table class="specs-table">
+          <tr><td>Sizes</td><td id="dispSizes">L | XL | XXL</td></tr>
+          <tr><td>Colours</td><td id="dispColours">5 Colours</td></tr>
+          <tr><td>Fabric</td><td id="dispFabric">Cotton Knit</td></tr>
+        </table>
+        <a id="waLink" href="https://wa.me/919965655991?text=Hello%20DR%20Garments,%20I%20am%20interested%20in%20Code:%20501" target="_blank" class="btn-enquiry">
+          WhatsApp Enquiry
+        </a>
+      </div>
+    </div>
+
+    <!-- Live Editable Options -->
+    <div class="edit-box">
+      <h4>Edit Product Details Directly</h4>
+      <div class="edit-grid">
+        <input type="text" id="editCode" value="501" placeholder="Code">
+        <input type="text" id="editPrice" value="₹215 / Piece" placeholder="Price">
+        <input type="text" id="editSizes" value="L | XL | XXL" placeholder="Sizes">
+        <input type="text" id="editMoq" value="100 Pieces" placeholder="MOQ">
+        <input type="text" id="editColours" value="5 Colours" placeholder="Colours">
+        <input type="text" id="editFabric" value="Cotton Knit" placeholder="Fabric">
+      </div>
+      <input type="text" id="editTitle" value="Ladies Nightwear Set – Top + Pant" placeholder="Title" style="width: 100%; margin-top: 0.6rem; background: var(--bg); border: 1px solid var(--border); color: #fff; padding: 0.55rem; border-radius: 6px; font-size: 0.82rem;">
+      <button class="btn-save-edit" onclick="applyEdits()">Update Product Details</button>
+    </div>
   </div>
 
-  <footer>
-    <p><strong>DR Garments</strong> • Tiruppur, Tamil Nadu</p>
-    <p>Strictly Wholesale Supply Only • Minimum Order Quantity Applies to All Products</p>
-  </footer>
-
   <script>
-    // Exact filenames from your GitHub root directory
-    const repoImages = [
-      "FB_IMG_1791544846969.jpg",
-      "FB_IMG_1791544849680.jpg",
-      "FB_IMG_1791544851819.jpg",
-      "FB_IMG_1791544853695.jpg",
-      "FB_IMG_1791544856267.jpg",
-      "FB_IMG_1791544859011.jpg",
-      "FB_IMG_1791544862972.jpg",
-      "FB_IMG_1791544864888.jpg",
-      "FB_IMG_1791544867019.jpg",
-      "FB_IMG_1791544870244.jpg",
-      "file_000000000ec82088e42fb8218683e950.jpg",
-      "file_00000000126c820881662ca393c52a37.jpg",
-      "file_000000002d648211b5a369fe4e222955.jpg",
-      "file_000000005fc48211a35e4afa06ff0ee3.jpg",
-      "file_0000000079f482088cca7a1c72f7fb54.jpg",
-      "file_00000000a20c8208bf3b43db8eb6a7c4.jpg",
-      "file_00000000b2b48208b1d8a93e36e637a2.jpg",
-      "file_00000000b464820b930c698656127118.jpg",
-      "file_00000000b9f48208a12a4b64a2f89f92.jpg",
-      "file_00000000c224820bbdc9fa50257e3c9c.jpg"
-    ];
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide-item');
+    const counter = document.getElementById('slideCount');
 
-    const products = [
-      { code: "501", name: "Ladies Nightwear Set – Top + Pant", price: "₹215 / Piece", moq: "100 Pieces", sizes: "L | XL | XXL", colours: "5 Colours", fabric: "Cotton Knit" },
-      { code: "502", name: "Girls Casual Wear – Top + Pant Set", price: "₹185 / Piece", moq: "100 Pieces", sizes: "M | L | XL", colours: "5 Colours", fabric: "Bio-Wash Cotton" },
-      { code: "503", name: "Boys Printed T-Shirt & Track Pant", price: "₹175 / Piece", moq: "100 Pieces", sizes: "24 | 26 | 28 | 30", colours: "5 Colours", fabric: "100% Cotton" },
-      { code: "504", name: "Ladies Dailywear Lounge Set", price: "₹220 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "4 Colours", fabric: "Soft Rayon/Cotton" },
-      { code: "505", name: "Kids Unisex Cotton Loungewear", price: "₹160 / Piece", moq: "100 Pieces", sizes: "20 | 22 | 24 | 26 | 28", colours: "6 Colours", fabric: "Combed Cotton" },
-      { code: "506", name: "Mens Premium Round Neck T-Shirt", price: "₹145 / Piece", moq: "100 Pieces", sizes: "M | L | XL | XXL", colours: "6 Colours", fabric: "Single Jersey Cotton" },
-      { code: "507", name: "Girls Fancy Printed Top & Bottom Set", price: "₹190 / Piece", moq: "100 Pieces", sizes: "22 | 24 | 26 | 28 | 30", colours: "5 Colours", fabric: "Soft Hosiery Cotton" },
-      { code: "508", name: "Boys Summer Cotton Shorts & Tee Set", price: "₹165 / Piece", moq: "100 Pieces", sizes: "20 to 30", colours: "5 Colours", fabric: "100% Combed Cotton" },
-      { code: "509", name: "Ladies Collar Set – Top + Pant", price: "₹228 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "5 Colours", fabric: "Premium Cotton Blend" },
-      { code: "510", name: "Ladies Stone Work Set – Top + Pant", price: "₹228 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "5 Colours", fabric: "Textured Cotton Knit" },
-      { code: "511", name: "Kids Printed Set – Top + Pant", price: "₹124 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Ribbed Cotton" },
-      { code: "512", name: "Girls Puff Printed Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "Soft Hosiery" },
-      { code: "513", name: "Girls Stone Set – Top + Pant", price: "₹163 / Piece", moq: "100 Pieces", sizes: "2 / 4 / 6 / 8 / 10 / 12 (Age: 2-10)", colours: "5 Colours", fabric: "Ribbed Hosiery Knit" },
-      { code: "514", name: "Boys Full Sleeve Set – Top + Pant", price: "₹140 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Slub Cotton Knit" },
-      { code: "515", name: "Boys Full Sleeve High Neck Set – Top + Pant", price: "₹143 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Fleece / Winter Knit" },
-      { code: "516", name: "Girls Stone Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "Soft Hosiery" },
-      { code: "517", name: "Boys High Neck Set – Top + Pant", price: "₹130 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Cotton Loopknit" },
-      { code: "518", name: "Girls Half Sleeve Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "Combed Cotton" },
-      { code: "519", name: "Girls Half Sleeve Set – Top + Pant", price: "₹134 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "Self-Stripe Hosiery" },
-      { code: "520", name: "Boys Full Sleeve Set – Top + Pant", price: "₹130 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Waffle / Textured Knit" },
-      { code: "521", name: "Boys Full Sleeve Sports Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Cotton Terry" },
-      { code: "522", name: "Girls Half Sleeve Set – Top + Pant", price: "₹134 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "Cotton Hosiery" },
-      { code: "523", name: "Girls All Over Print Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "AOP Cotton" },
-      { code: "524", name: "Unisex Set (Girls & Boys) – Top + Pant", price: "₹195 / Piece", moq: "100 Pieces", sizes: "2 / 4 / 6 / 8 / 10 / 12", colours: "5 Colours", fabric: "Heavy Track Terry" },
-      { code: "525", name: "Unisex Set (Girls & Boys) – Top + Pant", price: "₹202 / Piece", moq: "100 Pieces", sizes: "2 / 4 / 6 / 8 / 10 / 12", colours: "5 Colours", fabric: "Heavy Bio-Wash Cotton" },
-      { code: "526", name: "Unisex All Over Printed Set – Top + Pant", price: "₹172 / Piece", moq: "100 Pieces", sizes: "2 / 4 / 6 / 8 / 10 / 12", colours: "5 Colours", fabric: "Tie & Dye Cotton" },
-      { code: "527", name: "Boys Round Neck Set – Top + Pant", price: "₹124 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Slub Cotton Knit" },
-      { code: "528", name: "Mens Polo T-Shirt with Pocket", price: "₹199 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "4 Colours", fabric: "100% Cotton" },
-      { code: "529", name: "Mens Polo T-Shirt (Premium Look)", price: "₹299 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "24 Colours", fabric: "MARS FABRIC" },
-      { code: "530", name: "Mens Polo T-Shirt", price: "₹240 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "9 Colours", fabric: "MARS FABRIC" }
-    ];
+    function changeSlide(step) {
+      slides[currentSlide].classList.remove('active');
+      const currentVideo = slides[currentSlide].querySelector('video');
+      if (currentVideo) currentVideo.pause();
 
-    const grid = document.getElementById('catalogueGrid');
+      currentSlide = (currentSlide + step + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+      counter.textContent = (currentSlide + 1) + " / " + slides.length;
+    }
 
-    products.forEach((prod, pIdx) => {
-      const card = document.createElement('div');
-      card.className = 'card';
+    function applyEdits() {
+      const code = document.getElementById('editCode').value;
+      const title = document.getElementById('editTitle').value;
+      const price = document.getElementById('editPrice').value;
+      const moq = document.getElementById('editMoq').value;
+      const sizes = document.getElementById('editSizes').value;
+      const colours = document.getElementById('editColours').value;
+      const fabric = document.getElementById('editFabric').value;
 
-      // Direct absolute repo path ensures GitHub Pages always finds the image
-      const fileName = repoImages[pIdx % repoImages.length];
-      const fullPath = '/dr-garments/' + fileName;
+      document.getElementById('dispCode').textContent = "Code: " + code;
+      document.getElementById('dispTitle').textContent = title;
+      document.getElementById('dispPrice').textContent = price;
+      document.getElementById('dispMoq').textContent = "Min Order: " + moq;
+      document.getElementById('dispSizes').textContent = sizes;
+      document.getElementById('dispColours').textContent = colours;
+      document.getElementById('dispFabric').textContent = fabric;
 
-      const waMsg = encodeURIComponent(`Hello DR Garments, I would like to enquire about Product Code: ${prod.code} (${prod.name}).`);
+      const waMsg = encodeURIComponent("Hello DR Garments, I am interested in Code: " + code + " (" + title + ")");
+      document.getElementById('waLink').href = "https://wa.me/919965655991?text=" + waMsg;
 
-      card.innerHTML = `
-        <div class="img-box">
-          <img src="${fullPath}" 
-               onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/${fileName}';" 
-               alt="${prod.name}">
-        </div>
-        <div class="card-body">
-          <span class="code-badge">Code: ${prod.code}</span>
-          <h3 class="product-title">${prod.name}</h3>
-          <div class="price-row">
-            <span class="price">${prod.price}</span>
-            <span class="moq">Min Order: ${prod.moq}</span>
-          </div>
-          <table class="specs-table">
-            <tr><td>Sizes</td><td>${prod.sizes}</td></tr>
-            <tr><td>Colours</td><td>${prod.colours}</td></tr>
-            <tr><td>Fabric</td><td>${prod.fabric}</td></tr>
-          </table>
-          <a href="https://wa.me/919965655991?text=${waMsg}" target="_blank" class="btn-enquiry">
-            WhatsApp Enquiry
-          </a>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
+      alert("Updated successfully!");
+    }
   </script>
 </body>
 </html>
