@@ -41,21 +41,14 @@
     }
     .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-main); }
     
-    /* New Custom Logo Styling */
     .brand-logo-img {
       width: 48px;
       height: 48px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
-      border: 1px solid rgba(245, 158, 11, 0.5);
-    }
-    .brand-logo-fallback {
-      display: none;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      width: 48px; height: 48px; border-radius: 50%;
-      align-items: center; justify-content: center;
-      font-weight: 800; font-size: 1.2rem; color: #fff;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+      border: 1.5px solid #f59e0b;
+      background: #000;
     }
 
     .brand-text h1 { font-size: 1.15rem; font-weight: 800; }
@@ -73,7 +66,7 @@
 
     .container { max-width: 520px; margin: 1.5rem auto; padding: 0 1rem; }
 
-    /* Manager Form Box (Password protected) */
+    /* Manager Form Box (Hidden from customers) */
     .manager-box {
       display: none;
       background: var(--surface);
@@ -245,14 +238,11 @@
   <header>
     <div class="nav-container">
       <a href="#" class="brand">
-        <!-- New Brand Logo Image -->
-        <img src="logo.png" 
-             id="mainLogo" 
+        <!-- DR Garments Official Circular Logo -->
+        <img src="1002366361.png" 
              class="brand-logo-img" 
-             alt="DR Garments" 
-             onerror="if(!this.dataset.step){this.dataset.step='1';this.src='1002366361.png';}else if(this.dataset.step==='1'){this.dataset.step='2';this.src='./logo.png';}else{this.style.display='none';document.getElementById('fallbackLogo').style.display='flex';}">
-        <div id="fallbackLogo" class="brand-logo-fallback">DR</div>
-        
+             alt="DR Garments"
+             onerror="this.src='./1002366361.png';">
         <div class="brand-text">
           <h1>DR Garments</h1>
           <p>Tiruppur Wholesale</p>
@@ -263,7 +253,7 @@
   </header>
 
   <div class="container">
-    <!-- Manager Panel (Password Required) -->
+    <!-- Admin Manager Box (Protected) -->
     <div class="manager-box" id="managerBox">
       <h3>
         <span>+ Add / Manage Product</span>
@@ -293,7 +283,7 @@
       <button class="btn-add" onclick="addProduct()">+ Add Product to Catalogue</button>
     </div>
 
-    <!-- Product Display List -->
+    <!-- Product Card -->
     <div id="catalogueList"></div>
   </div>
 
@@ -306,6 +296,7 @@
     const ADMIN_KEY = "dr9965";
     let isAdminLoggedIn = false;
 
+    // Single Product Setup for Code 529
     let catalogueData = [
       {
         id: "prod_529",
@@ -317,11 +308,11 @@
         colours: "24 Colours",
         fabric: "MARS FABRIC",
         slides: [
-          { type: 'image', src: '1002372112.png', fallback: 'file_000000005fc48211a35e4afa06ff0ee3.jpg' },
-          { type: 'image', src: '1002372104.png', fallback: 'file_0000000079f482088cca7a1c72f7fb54.jpg' },
-          { type: 'image', src: '1002372113.png', fallback: 'file_000000002d648211b5a369fe4e222955.jpg' },
-          { type: 'image', src: '1002372114.png', fallback: 'file_00000000126c820881662ca393c52a37.jpg' },
-          { type: 'video', src: 'AhaConvert_1791545754_q5iYt87g89g8e6d0a790510daea67280.mp4' }
+          { type: 'image', src: '1002372112.png' },
+          { type: 'image', src: '1002372104.png' },
+          { type: 'image', src: '1002372113.png' },
+          { type: 'image', src: '1002372114.png' },
+          { type: 'video', src: '1002373579.mp4' }
         ]
       }
     ];
@@ -363,10 +354,9 @@
                 </video>
               </div>`;
           } else {
-            const fallbackAttr = s.fallback ? `onerror="if(!this.dataset.fallback){this.dataset.fallback=true;this.src='${s.fallback}';}"` : `onerror="this.src='./${s.src}'"`;
             return `
               <div class="slide-item ${activeClass}">
-                <img src="${s.src}" ${fallbackAttr} alt="${item.title}">
+                <img src="${s.src}" onerror="this.src='./${s.src}';" alt="${item.title}">
               </div>`;
           }
         }).join('');
