@@ -41,13 +41,13 @@
     }
     .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-main); }
     
-    /* Perfect Embedded Circular Logo */
+    /* Clean, Bold DR Emblem Logo */
     .brand-logo-wrap {
       width: 48px;
       height: 48px;
       border-radius: 50%;
       border: 2px solid #f59e0b;
-      background: radial-gradient(circle, #0b1a30 0%, #050b14 100%);
+      background: radial-gradient(circle, #0f172a 0%, #020617 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -72,7 +72,7 @@
 
     .container { max-width: 520px; margin: 1.5rem auto; padding: 0 1rem; }
 
-    /* Login Modal Box */
+    /* Login Modal Popup */
     .login-modal {
       display: none;
       position: fixed;
@@ -291,14 +291,18 @@
   <header>
     <div class="nav-container">
       <a href="#" class="brand">
-        <!-- Official DR Garments Logo Embedded Direct SVG -->
+        <!-- Crystal Clear 'DR' Gold & Blue Logo -->
         <div class="brand-logo-wrap">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="47" stroke="#f59e0b" stroke-width="3"/>
-            <path d="M26 30H46C55 30 60 35 60 43C60 51 55 56 46 56H36V70H26V30Z" fill="#1e40af"/>
-            <path d="M36 38H45C49 38 51 40 51 43C51 46 49 48 45 48H36V38Z" fill="#ffffff"/>
-            <path d="M50 42C52 35 58 30 68 30C78 30 83 36 83 44C83 51 78 56 70 57L84 70H71L60 58H58V70H48V42H50Z" fill="#f59e0b"/>
-            <path d="M58 38H67C71 38 73 40 73 44C73 47 71 50 67 50H58V38Z" fill="#ffffff"/>
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fde047" />
+                <stop offset="100%" stop-color="#d97706" />
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="50" r="46" stroke="url(#goldGrad)" stroke-width="3" fill="none" />
+            <text x="21" y="65" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="44" fill="#38bdf8">D</text>
+            <text x="50" y="65" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="44" fill="url(#goldGrad)">R</text>
           </svg>
         </div>
         <div class="brand-text">
@@ -367,11 +371,12 @@
     const ADMIN_KEY = "Sg0808";
     let isAdminLoggedIn = false;
 
-    // Check URL param ?admin=true
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('admin') === 'true') {
       setTimeout(() => { openLoginModal(); }, 300);
     }
+
+    const BASE_RAW = "https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/";
 
     const defaultCatalogue = [
       {
@@ -384,11 +389,11 @@
         colours: "24 Colours",
         fabric: "MARS FABRIC",
         slides: [
-          { type: 'image', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002372112.png' },
-          { type: 'image', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002372104.png' },
-          { type: 'image', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002372113.png' },
-          { type: 'image', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002372114.png' },
-          { type: 'video', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002373579.mp4' }
+          { type: 'image', src: BASE_RAW + 'file_000000005fc48211a35e4afa06ff0ee3.jpg' },
+          { type: 'image', src: BASE_RAW + 'file_0000000079f482088cca7a1c72f7fb54.jpg' },
+          { type: 'image', src: BASE_RAW + 'file_000000002d648211b5a369fe4e222955.jpg' },
+          { type: 'image', src: BASE_RAW + 'file_00000000126c820881662ca393c52a37.jpg' },
+          { type: 'video', src: BASE_RAW + 'AhaConvert_1791545754_q5iYt87g89g8e6d0a790510daea67280.mp4' }
         ]
       }
     ];
@@ -443,7 +448,7 @@
           } else {
             return `
               <div class="slide-item ${activeClass}">
-                <img src="${s.src}" alt="${item.title}" onerror="this.src='./${s.src}';">
+                <img src="${s.src}" alt="${item.title}">
               </div>`;
           }
         }).join('');
@@ -534,10 +539,6 @@
       if (vFiles.length > 0) {
         const vidB64 = await fileToDataUrl(vFiles[0]);
         newSlides.push({ type: 'video', src: vidB64 });
-      }
-
-      if (newSlides.length === 0) {
-        newSlides.push({ type: 'image', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002372112.png' });
       }
 
       const newProduct = {
