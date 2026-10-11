@@ -142,7 +142,7 @@
       position: relative;
       width: 100%;
       height: 380px;
-      background: #000;
+      background: #11141c;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -164,22 +164,15 @@
     .slide-item img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-    }
-
-    .slide-item video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #000;
+      object-fit: cover;
     }
 
     .slider-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(15, 17, 23, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(15, 17, 23, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: #fff;
       width: 36px;
       height: 36px;
@@ -330,402 +323,92 @@
   </footer>
 
   <script>
+    const imageList = [
+      "FB_IMG_1791544846969.jpg",
+      "FB_IMG_1791544849680.jpg",
+      "FB_IMG_1791544851819.jpg",
+      "FB_IMG_1791544853695.jpg",
+      "FB_IMG_1791544856267.jpg",
+      "FB_IMG_1791544859011.jpg",
+      "FB_IMG_1791544862972.jpg",
+      "FB_IMG_1791544864888.jpg",
+      "FB_IMG_1791544867019.jpg",
+      "FB_IMG_1791544870244.jpg",
+      "file_000000000ec82088e42fb8218683e950.jpg",
+      "file_00000000126c820881662ca393c52a37.jpg",
+      "file_000000002d648211b5a369fe4e222955.jpg",
+      "file_000000005fc48211a35e4afa06ff0ee3.jpg",
+      "file_0000000079f482088cca7a1c72f7fb54.jpg",
+      "file_00000000a20c8208bf3b43db8eb6a7c4.jpg",
+      "file_00000000b2b48208b1d8a93e36e637a2.jpg",
+      "file_00000000b464820b930c698656127118.jpg",
+      "file_00000000b9f48208a12a4b64a2f89f92.jpg",
+      "file_00000000c224820bbdc9fa50257e3c9c.jpg"
+    ];
+
     const products = [
-      {
-        code: "501",
-        name: "Ladies Nightwear Set – Top + Pant",
-        price: "₹215 / Piece",
-        moq: "100 Pieces",
-        sizes: "L | XL | XXL",
-        colours: "5 Colours",
-        fabric: "Cotton Knit",
-        slides: [
-          { type: 'image', src: 'images/p501_1.jpg', fallback: 'p501_1.jpg' },
-          { type: 'image', src: 'images/p501_2.jpg', fallback: 'p501_2.jpg' },
-          { type: 'image', src: 'images/p501_3.jpg', fallback: 'p501_3.jpg' }
-        ]
-      },
-      {
-        code: "502",
-        name: "Girls Casual Wear – Top + Pant Set",
-        price: "₹185 / Piece",
-        moq: "100 Pieces",
-        sizes: "M | L | XL",
-        colours: "5 Colours",
-        fabric: "Bio-Wash Cotton",
-        slides: [
-          { type: 'image', src: 'images/p502_1.jpg', fallback: 'p502_1.jpg' },
-          { type: 'image', src: 'images/p502_2.jpg', fallback: 'p502_2.jpg' }
-        ]
-      },
-      {
-        code: "503",
-        name: "Boys Printed T-Shirt & Track Pant",
-        price: "₹175 / Piece",
-        moq: "100 Pieces",
-        sizes: "24 | 26 | 28 | 30",
-        colours: "5 Colours",
-        fabric: "100% Cotton",
-        slides: [
-          { type: 'image', src: 'images/p503_1.jpg', fallback: 'p503_1.jpg' },
-          { type: 'image', src: 'images/p503_2.jpg', fallback: 'p503_2.jpg' }
-        ]
-      },
-      {
-        code: "504",
-        name: "Ladies Dailywear Lounge Set",
-        price: "₹220 / Piece",
-        moq: "100 Pieces",
-        sizes: "XL | 2XL | 3XL",
-        colours: "4 Colours",
-        fabric: "Soft Rayon/Cotton",
-        slides: [
-          { type: 'image', src: 'images/p504_1.jpg', fallback: 'p504_1.jpg' }
-        ]
-      },
-      {
-        code: "505",
-        name: "Kids Unisex Cotton Loungewear",
-        price: "₹160 / Piece",
-        moq: "100 Pieces",
-        sizes: "20 | 22 | 24 | 26 | 28",
-        colours: "6 Colours",
-        fabric: "Combed Cotton",
-        slides: [
-          { type: 'image', src: 'images/p505_1.jpg', fallback: 'p505_1.jpg' }
-        ]
-      },
-      {
-        code: "506",
-        name: "Mens Premium Round Neck T-Shirt",
-        price: "₹145 / Piece",
-        moq: "100 Pieces",
-        sizes: "M | L | XL | XXL",
-        colours: "6 Colours",
-        fabric: "Single Jersey Cotton",
-        slides: [
-          { type: 'image', src: 'images/p506_1.jpg', fallback: 'p506_1.jpg' }
-        ]
-      },
-      {
-        code: "507",
-        name: "Girls Fancy Printed Top & Bottom Set",
-        price: "₹190 / Piece",
-        moq: "100 Pieces",
-        sizes: "22 | 24 | 26 | 28 | 30",
-        colours: "5 Colours",
-        fabric: "Soft Hosiery Cotton",
-        slides: [
-          { type: 'image', src: 'images/p507_1.jpg', fallback: 'p507_1.jpg' }
-        ]
-      },
-      {
-        code: "508",
-        name: "Boys Summer Cotton Shorts & Tee Set",
-        price: "₹165 / Piece",
-        moq: "100 Pieces",
-        sizes: "20 to 30",
-        colours: "5 Colours",
-        fabric: "100% Combed Cotton",
-        slides: [
-          { type: 'image', src: 'images/p508_1.jpg', fallback: 'p508_1.jpg' }
-        ]
-      },
-      {
-        code: "509",
-        name: "Ladies collor set – Top + Pant",
-        price: "₹228 / Piece",
-        moq: "100 Pieces",
-        sizes: "XL | 2XL | 3XL",
-        colours: "5 Colours",
-        fabric: "Premium Cotton Blend",
-        slides: [
-          { type: 'image', src: 'images/p509_1.jpg', fallback: 'p509_1.jpg' },
-          { type: 'image', src: 'images/p509_2.jpg', fallback: 'p509_2.jpg' }
-        ]
-      },
-      {
-        code: "510",
-        name: "Ladies stone work set – Top + Pant",
-        price: "₹228 / Piece",
-        moq: "100 Pieces",
-        sizes: "XL | 2XL | 3XL",
-        colours: "5 Colours",
-        fabric: "Textured Cotton Knit",
-        slides: [
-          { type: 'image', src: 'images/p510_1.jpg', fallback: 'p510_1.jpg' }
-        ]
-      },
-      {
-        code: "511",
-        name: "Kids printed set – Top + Pant",
-        price: "₹124 / Piece",
-        moq: "100 Pieces",
-        sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Ribbed Cotton",
-        slides: [
-          { type: 'image', src: 'images/p511_1.jpg', fallback: 'p511_1.jpg' }
-        ]
-      },
-      {
-        code: "512",
-        name: "Girls puff printed set – Top + Pant",
-        price: "₹137 / Piece",
-        moq: "100 Pieces",
-        sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Soft Hosiery",
-        slides: [
-          { type: 'image', src: 'images/p512_1.jpg', fallback: 'p512_1.jpg' }
-        ]
-      },
-      {
-        code: "513",
-        name: "Girls stone set – Top + Pant",
-        price: "₹163 / Piece",
-        moq: "100 Pieces",
-        sizes: "2 / 4 / 6 / 8 / 10 / 12 (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Ribbed Hosiery Knit",
-        slides: [
-          { type: 'image', src: 'images/p513_1.jpg', fallback: 'p513_1.jpg' }
-        ]
-      },
-      {
-        code: "514",
-        name: "Boys full sleeve set – Top + Pant",
-        price: "₹140 / Piece",
-        moq: "100 Pieces",
-        sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Slub Cotton Knit",
-        slides: [
-          { type: 'image', src: 'images/p514_1.jpg', fallback: 'p514_1.jpg' }
-        ]
-      },
-      {
-        code: "515",
-        name: "Boys full sleeve, high neck set – Top + Pant",
-        price: "₹143 / Piece",
-        moq: "100 Pieces",
-        sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Fleece / Winter Knit",
-        slides: [
-          { type: 'image', src: 'images/p515_1.jpg', fallback: 'p515_1.jpg' }
-        ]
-      },
-      {
-        code: "516",
-        name: "Girls stone set – Top + Pant",
-        price: "₹137 / Piece",
-        moq: "100 Pieces",
-        sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Soft Hosiery",
-        slides: [
-          { type: 'image', src: 'images/p516_1.jpg', fallback: 'p516_1.jpg' }
-        ]
-      },
-      {
-        code: "517",
-        name: "Boys high neck set – Top + Pant",
-        price: "₹130 / Piece",
-        moq: "100 Pieces",
-        sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Cotton Loopknit",
-        slides: [
-          { type: 'image', src: 'images/p517_1.jpg', fallback: 'p517_1.jpg' }
-        ]
-      },
-      {
-        code: "518",
-        name: "Girls half sleeve set – Top + Pant",
-        price: "₹137 / Piece",
-        moq: "100 Pieces",
-        sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Combed Cotton",
-        slides: [
-          { type: 'image', src: 'images/p518_1.jpg', fallback: 'p518_1.jpg' }
-        ]
-      },
-      {
-        code: "519",
-        name: "Girls half sleeve set – Top + Pant",
-        price: "₹134 / Piece",
-        moq: "100 Pieces",
-        sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Self-Stripe Hosiery",
-        slides: [
-          { type: 'image', src: 'images/p519_1.jpg', fallback: 'p519_1.jpg' }
-        ]
-      },
-      {
-        code: "520",
-        name: "Boys full sleeve set – Top + Pant",
-        price: "₹130 / Piece",
-        moq: "100 Pieces",
-        sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Waffle / Textured Knit",
-        slides: [
-          { type: 'image', src: 'images/p520_1.jpg', fallback: 'p520_1.jpg' }
-        ]
-      },
-      {
-        code: "521",
-        name: "Boys full sleeve sports set – Top + Pant",
-        price: "₹137 / Piece",
-        moq: "100 Pieces",
-        sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Cotton Terry",
-        slides: [
-          { type: 'image', src: 'images/p521_1.jpg', fallback: 'p521_1.jpg' }
-        ]
-      },
-      {
-        code: "522",
-        name: "Girls half sleeve set – Top + Pant",
-        price: "₹134 / Piece",
-        moq: "100 Pieces",
-        sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Cotton Hosiery",
-        slides: [
-          { type: 'image', src: 'images/p522_1.jpg', fallback: 'p522_1.jpg' }
-        ]
-      },
-      {
-        code: "523",
-        name: "Girls all over print set – Top + Pant",
-        price: "₹137 / Piece",
-        moq: "100 Pieces",
-        sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "AOP Cotton",
-        slides: [
-          { type: 'image', src: 'images/p523_1.jpg', fallback: 'p523_1.jpg' }
-        ]
-      },
-      {
-        code: "524",
-        name: "Unisex set (girls & boys) – Top + Pant",
-        price: "₹195 / Piece",
-        moq: "100 Pieces",
-        sizes: "2 / 4 / 6 / 8 / 10 / 12",
-        colours: "5 Colours",
-        fabric: "Heavy Track Terry",
-        slides: [
-          { type: 'image', src: 'images/p524_1.jpg', fallback: 'p524_1.jpg' }
-        ]
-      },
-      {
-        code: "525",
-        name: "Unisex set (girls & boys) – Top + Pant",
-        price: "₹202 / Piece",
-        moq: "100 Pieces",
-        sizes: "2 / 4 / 6 / 8 / 10 / 12",
-        colours: "5 Colours",
-        fabric: "Heavy Bio-Wash Cotton",
-        slides: [
-          { type: 'image', src: 'images/p525_1.jpg', fallback: 'p525_1.jpg' }
-        ]
-      },
-      {
-        code: "526",
-        name: "Unisex all over printed set – Top + Pant",
-        price: "₹172 / Piece",
-        moq: "100 Pieces",
-        sizes: "2 / 4 / 6 / 8 / 10 / 12",
-        colours: "5 Colours",
-        fabric: "Tie & Dye Cotton",
-        slides: [
-          { type: 'image', src: 'images/p526_1.jpg', fallback: 'p526_1.jpg' }
-        ]
-      },
-      {
-        code: "527",
-        name: "Boys round neck set – Top + Pant",
-        price: "₹124 / Piece",
-        moq: "100 Pieces",
-        sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)",
-        colours: "5 Colours",
-        fabric: "Slub Cotton Knit",
-        slides: [
-          { type: 'image', src: 'images/p527_1.jpg', fallback: 'p527_1.jpg' }
-        ]
-      },
-      {
-        code: "528",
-        name: "Mens polo t-shirt with pocket",
-        price: "₹199 / Piece",
-        moq: "100 Pieces",
-        sizes: "S / M / L / XL / XXL",
-        colours: "4 Colours",
-        fabric: "100% COTTON",
-        slides: [
-          { type: 'image', src: 'images/p528_1.png', fallback: 'p528_1.png' },
-          { type: 'image', src: 'images/p528_2.png', fallback: 'p528_2.png' }
-        ]
-      },
-      {
-        code: "529",
-        name: "Mens polo t-shirt (Premium Look)",
-        price: "₹299 / Piece",
-        moq: "100 Pieces",
-        sizes: "S / M / L / XL / XXL",
-        colours: "24 Colours",
-        fabric: "MARS FABRIC",
-        slides: [
-          { type: 'image', src: 'images/p529_1.png', fallback: 'p529_1.png' }
-        ]
-      },
-      {
-        code: "530",
-        name: "Mens polo t-shirt",
-        price: "₹240 / Piece",
-        moq: "100 Pieces",
-        sizes: "S / M / L / XL / XXL",
-        colours: "9 Colours",
-        fabric: "MARS FABRIC",
-        slides: [
-          { type: 'image', src: 'images/p530_1.png', fallback: 'p530_1.png' }
-        ]
-      }
+      { code: "501", name: "Ladies Nightwear Set – Top + Pant", price: "₹215 / Piece", moq: "100 Pieces", sizes: "L | XL | XXL", colours: "5 Colours", fabric: "Cotton Knit" },
+      { code: "502", name: "Girls Casual Wear – Top + Pant Set", price: "₹185 / Piece", moq: "100 Pieces", sizes: "M | L | XL", colours: "5 Colours", fabric: "Bio-Wash Cotton" },
+      { code: "503", name: "Boys Printed T-Shirt & Track Pant", price: "₹175 / Piece", moq: "100 Pieces", sizes: "24 | 26 | 28 | 30", colours: "5 Colours", fabric: "100% Cotton" },
+      { code: "504", name: "Ladies Dailywear Lounge Set", price: "₹220 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "4 Colours", fabric: "Soft Rayon/Cotton" },
+      { code: "505", name: "Kids Unisex Cotton Loungewear", price: "₹160 / Piece", moq: "100 Pieces", sizes: "20 | 22 | 24 | 26 | 28", colours: "6 Colours", fabric: "Combed Cotton" },
+      { code: "506", name: "Mens Premium Round Neck T-Shirt", price: "₹145 / Piece", moq: "100 Pieces", sizes: "M | L | XL | XXL", colours: "6 Colours", fabric: "Single Jersey Cotton" },
+      { code: "507", name: "Girls Fancy Printed Top & Bottom Set", price: "₹190 / Piece", moq: "100 Pieces", sizes: "22 | 24 | 26 | 28 | 30", colours: "5 Colours", fabric: "Soft Hosiery Cotton" },
+      { code: "508", name: "Boys Summer Cotton Shorts & Tee Set", price: "₹165 / Piece", moq: "100 Pieces", sizes: "20 to 30", colours: "5 Colours", fabric: "100% Combed Cotton" },
+      { code: "509", name: "Ladies collor set – Top + Pant", price: "₹228 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "5 Colours", fabric: "Premium Cotton Blend" },
+      { code: "510", name: "Ladies stone work set – Top + Pant", price: "₹228 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "5 Colours", fabric: "Textured Cotton Knit" },
+      { code: "511", name: "Kids printed set – Top + Pant", price: "₹124 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Ribbed Cotton" },
+      { code: "512", name: "Girls puff printed set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Soft Hosiery" },
+      { code: "513", name: "Girls stone set – Top + Pant", price: "₹163 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Ribbed Hosiery Knit" },
+      { code: "514", name: "Boys full sleeve set – Top + Pant", price: "₹140 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Slub Cotton Knit" },
+      { code: "515", name: "Boys full sleeve, high neck set", price: "₹143 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Fleece / Winter Knit" },
+      { code: "516", name: "Girls stone set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Soft Hosiery" },
+      { code: "517", name: "Boys high neck set – Top + Pant", price: "₹130 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Cotton Loopknit" },
+      { code: "518", name: "Girls half sleeve set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Combed Cotton" },
+      { code: "519", name: "Girls half sleeve set – Top + Pant", price: "₹134 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Self-Stripe Hosiery" },
+      { code: "520", name: "Boys full sleeve set – Top + Pant", price: "₹130 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Waffle / Textured Knit" },
+      { code: "521", name: "Boys full sleeve sports set", price: "₹137 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Cotton Terry" },
+      { code: "522", name: "Girls half sleeve set – Top + Pant", price: "₹134 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Cotton Hosiery" },
+      { code: "523", name: "Girls all over print set", price: "₹137 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "AOP Cotton" },
+      { code: "524", name: "Unisex set (girls & boys)", price: "₹195 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Heavy Track Terry" },
+      { code: "525", name: "Unisex set (girls & boys)", price: "₹202 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Heavy Bio-Wash Cotton" },
+      { code: "526", name: "Unisex all over printed set", price: "₹172 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Tie & Dye Cotton" },
+      { code: "527", name: "Boys round neck set – Top + Pant", price: "₹124 / Piece", moq: "100 Pieces", sizes: "Age: 2-10", colours: "5 Colours", fabric: "Slub Cotton Knit" },
+      { code: "528", name: "Mens polo t-shirt with pocket", price: "₹199 / Piece", moq: "100 Pieces", sizes: "S to XXL", colours: "4 Colours", fabric: "100% COTTON" },
+      { code: "529", name: "Mens polo t-shirt (Premium)", price: "₹299 / Piece", moq: "100 Pieces", sizes: "S to XXL", colours: "24 Colours", fabric: "MARS FABRIC" },
+      { code: "530", name: "Mens polo t-shirt", price: "₹240 / Piece", moq: "100 Pieces", sizes: "S to XXL", colours: "9 Colours", fabric: "MARS FABRIC" }
     ];
 
     const grid = document.getElementById('catalogueGrid');
+
+    function tryNextImageSource(imgElement, fileName) {
+      const current = imgElement.getAttribute('data-attempt') || '0';
+      if (current === '0') {
+        imgElement.setAttribute('data-attempt', '1');
+        imgElement.src = './' + fileName;
+      } else if (current === '1') {
+        imgElement.setAttribute('data-attempt', '2');
+        imgElement.src = 'images/' + fileName;
+      } else if (current === '2') {
+        imgElement.setAttribute('data-attempt', '3');
+        imgElement.src = './images/' + fileName;
+      }
+    }
 
     products.forEach((prod, pIdx) => {
       const card = document.createElement('div');
       card.className = 'card';
 
-      let slidesHtml = prod.slides.map((s, sIdx) => {
-        const activeClass = sIdx === 0 ? 'active' : '';
-        const fallbackAttr = s.fallback ? `onerror="if(this.src.indexOf('${s.fallback}')===-1)this.src='${s.fallback}';"` : '';
-        return `<div class="slide-item ${activeClass}">
-                  <img src="${s.src}" alt="${prod.name}" ${fallbackAttr} loading="lazy">
-                </div>`;
-      }).join('');
-
-      const totalSlides = prod.slides.length;
-      const navControls = totalSlides > 1 ? `
-        <button class="slider-btn prev" onclick="changeSlide(${pIdx}, -1)">&#10094;</button>
-        <button class="slider-btn next" onclick="changeSlide(${pIdx}, 1)">&#10095;</button>
-        <div class="slide-counter" id="counter-${pIdx}">1 / ${totalSlides}</div>
-      ` : '';
+      const fileName = imageList[pIdx % imageList.length];
+      const initialSrc = fileName;
 
       const waMsg = encodeURIComponent(`வணக்கம் DR Garments, குறியீடு: ${prod.code} (${prod.name}) ஆர்டர் விவரங்கள் தேவை.`);
 
       card.innerHTML = `
         <div class="slider-container" id="slider-${pIdx}">
-          ${slidesHtml}
-          ${navControls}
+          <div class="slide-item active">
+            <img src="${initialSrc}" alt="${prod.name}" onerror="tryNextImageSource(this, '${fileName}')" loading="lazy">
+          </div>
         </div>
         <div class="card-body">
           <span class="code-badge">குறியீடு: ${prod.code}</span>
@@ -746,27 +429,6 @@
       `;
       grid.appendChild(card);
     });
-
-    function changeSlide(pIdx, step) {
-      const slider = document.getElementById(`slider-${pIdx}`);
-      const slides = slider.querySelectorAll('.slide-item');
-      let currentIndex = 0;
-
-      slides.forEach((slide, idx) => {
-        if (slide.classList.contains('active')) {
-          currentIndex = idx;
-        }
-      });
-
-      slides[currentIndex].classList.remove('active');
-      let nextIndex = (currentIndex + step + slides.length) % slides.length;
-      slides[nextIndex].classList.add('active');
-
-      const counter = document.getElementById(`counter-${pIdx}`);
-      if (counter) {
-        counter.textContent = `${nextIndex + 1} / ${slides.length}`;
-      }
-    }
   </script>
 </body>
 </html>
