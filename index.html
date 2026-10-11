@@ -10,7 +10,6 @@
   <style>
     :root {
       --primary: #c9182b;
-      --primary-dark: #9e1020;
       --accent: #f59e0b;
       --bg: #0f1117;
       --surface: #181b24;
@@ -36,7 +35,6 @@
 
     header {
       background: rgba(24, 27, 36, 0.95);
-      backdrop-filter: blur(10px);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -98,7 +96,6 @@
       font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     .hero {
@@ -112,9 +109,7 @@
       font-size: 1.8rem;
       font-weight: 800;
       margin-bottom: 0.5rem;
-      background: linear-gradient(to right, #fff, var(--text-muted));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #fff;
     }
 
     .hero p {
@@ -141,12 +136,6 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(201, 24, 43, 0.5);
     }
 
     .slider-container {
@@ -176,7 +165,6 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      user-select: none;
     }
 
     .slide-item video {
@@ -190,23 +178,18 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(15, 17, 23, 0.7);
+      background: rgba(15, 17, 23, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff;
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       z-index: 5;
-      transition: background 0.2s;
-    }
-
-    .slider-btn:hover {
-      background: var(--primary);
     }
 
     .slider-btn.prev { left: 8px; }
@@ -216,10 +199,10 @@
       position: absolute;
       bottom: 8px;
       right: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 2px 7px;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 2px 8px;
       border-radius: 20px;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 600;
       color: #fff;
     }
@@ -305,11 +288,6 @@
       border-radius: 8px;
       font-size: 0.88rem;
       font-weight: 700;
-      transition: opacity 0.2s;
-    }
-
-    .btn-enquiry:hover {
-      opacity: 0.9;
     }
 
     footer {
@@ -319,10 +297,6 @@
       padding: 2rem 1rem;
       color: var(--text-muted);
       font-size: 0.82rem;
-    }
-
-    footer p {
-      margin-bottom: 0.3rem;
     }
   </style>
 </head>
@@ -347,9 +321,7 @@
   </div>
 
   <div class="container">
-    <div class="product-grid" id="catalogueGrid">
-      <!-- 30 Products Rendered Dynamically -->
-    </div>
+    <div class="product-grid" id="catalogueGrid"></div>
   </div>
 
   <footer>
@@ -368,10 +340,9 @@
         colours: "5 Colours",
         fabric: "Cotton Knit",
         slides: [
-          { type: 'image', src: 'images/p501_1.jpg' },
-          { type: 'image', src: 'images/p501_2.jpg' },
-          { type: 'image', src: 'images/p501_3.jpg' },
-          { type: 'video', src: 'videos/p501.mp4' }
+          { type: 'image', src: 'images/p501_1.jpg', fallback: 'p501_1.jpg' },
+          { type: 'image', src: 'images/p501_2.jpg', fallback: 'p501_2.jpg' },
+          { type: 'image', src: 'images/p501_3.jpg', fallback: 'p501_3.jpg' }
         ]
       },
       {
@@ -383,9 +354,8 @@
         colours: "5 Colours",
         fabric: "Bio-Wash Cotton",
         slides: [
-          { type: 'image', src: 'images/p502_1.jpg' },
-          { type: 'image', src: 'images/p502_2.jpg' },
-          { type: 'video', src: 'videos/p502.mp4' }
+          { type: 'image', src: 'images/p502_1.jpg', fallback: 'p502_1.jpg' },
+          { type: 'image', src: 'images/p502_2.jpg', fallback: 'p502_2.jpg' }
         ]
       },
       {
@@ -397,9 +367,8 @@
         colours: "5 Colours",
         fabric: "100% Cotton",
         slides: [
-          { type: 'image', src: 'images/p503_1.jpg' },
-          { type: 'image', src: 'images/p503_2.jpg' },
-          { type: 'video', src: 'videos/p503.mp4' }
+          { type: 'image', src: 'images/p503_1.jpg', fallback: 'p503_1.jpg' },
+          { type: 'image', src: 'images/p503_2.jpg', fallback: 'p503_2.jpg' }
         ]
       },
       {
@@ -411,9 +380,7 @@
         colours: "4 Colours",
         fabric: "Soft Rayon/Cotton",
         slides: [
-          { type: 'image', src: 'images/p504_1.jpg' },
-          { type: 'image', src: 'images/p504_2.jpg' },
-          { type: 'video', src: 'videos/p504.mp4' }
+          { type: 'image', src: 'images/p504_1.jpg', fallback: 'p504_1.jpg' }
         ]
       },
       {
@@ -425,9 +392,7 @@
         colours: "6 Colours",
         fabric: "Combed Cotton",
         slides: [
-          { type: 'image', src: 'images/p505_1.jpg' },
-          { type: 'image', src: 'images/p505_2.jpg' },
-          { type: 'video', src: 'videos/p505.mp4' }
+          { type: 'image', src: 'images/p505_1.jpg', fallback: 'p505_1.jpg' }
         ]
       },
       {
@@ -439,9 +404,7 @@
         colours: "6 Colours",
         fabric: "Single Jersey Cotton",
         slides: [
-          { type: 'image', src: 'images/p506_1.jpg' },
-          { type: 'image', src: 'images/p506_2.jpg' },
-          { type: 'video', src: 'videos/p506.mp4' }
+          { type: 'image', src: 'images/p506_1.jpg', fallback: 'p506_1.jpg' }
         ]
       },
       {
@@ -453,9 +416,7 @@
         colours: "5 Colours",
         fabric: "Soft Hosiery Cotton",
         slides: [
-          { type: 'image', src: 'images/p507_1.jpg' },
-          { type: 'image', src: 'images/p507_2.jpg' },
-          { type: 'video', src: 'videos/p507.mp4' }
+          { type: 'image', src: 'images/p507_1.jpg', fallback: 'p507_1.jpg' }
         ]
       },
       {
@@ -467,9 +428,7 @@
         colours: "5 Colours",
         fabric: "100% Combed Cotton",
         slides: [
-          { type: 'image', src: 'images/p508_1.jpg' },
-          { type: 'image', src: 'images/p508_2.jpg' },
-          { type: 'video', src: 'videos/p508.mp4' }
+          { type: 'image', src: 'images/p508_1.jpg', fallback: 'p508_1.jpg' }
         ]
       },
       {
@@ -481,12 +440,8 @@
         colours: "5 Colours",
         fabric: "Premium Cotton Blend",
         slides: [
-          { type: 'image', src: 'images/p509_1.jpg' },
-          { type: 'image', src: 'images/p509_2.jpg' },
-          { type: 'image', src: 'images/p509_3.jpg' },
-          { type: 'image', src: 'images/p509_4.jpg' },
-          { type: 'image', src: 'images/p509_5.jpg' },
-          { type: 'video', src: 'videos/p509.mp4' }
+          { type: 'image', src: 'images/p509_1.jpg', fallback: 'p509_1.jpg' },
+          { type: 'image', src: 'images/p509_2.jpg', fallback: 'p509_2.jpg' }
         ]
       },
       {
@@ -498,11 +453,7 @@
         colours: "5 Colours",
         fabric: "Textured Cotton Knit",
         slides: [
-          { type: 'image', src: 'images/p510_1.jpg' },
-          { type: 'image', src: 'images/p510_2.jpg' },
-          { type: 'image', src: 'images/p510_3.jpg' },
-          { type: 'image', src: 'images/p510_4.jpg' },
-          { type: 'video', src: 'videos/p510.mp4' }
+          { type: 'image', src: 'images/p510_1.jpg', fallback: 'p510_1.jpg' }
         ]
       },
       {
@@ -514,12 +465,7 @@
         colours: "5 Colours",
         fabric: "Ribbed Cotton",
         slides: [
-          { type: 'image', src: 'images/p511_1.jpg' },
-          { type: 'image', src: 'images/p511_2.jpg' },
-          { type: 'image', src: 'images/p511_3.jpg' },
-          { type: 'image', src: 'images/p511_4.jpg' },
-          { type: 'image', src: 'images/p511_5.jpg' },
-          { type: 'video', src: 'videos/p511.mp4' }
+          { type: 'image', src: 'images/p511_1.jpg', fallback: 'p511_1.jpg' }
         ]
       },
       {
@@ -531,13 +477,7 @@
         colours: "5 Colours",
         fabric: "Soft Hosiery",
         slides: [
-          { type: 'image', src: 'images/p512_1.jpg' },
-          { type: 'image', src: 'images/p512_2.jpg' },
-          { type: 'image', src: 'images/p512_3.jpg' },
-          { type: 'image', src: 'images/p512_4.jpg' },
-          { type: 'image', src: 'images/p512_5.jpg' },
-          { type: 'image', src: 'images/p512_6.jpg' },
-          { type: 'video', src: 'videos/p512.mp4' }
+          { type: 'image', src: 'images/p512_1.jpg', fallback: 'p512_1.jpg' }
         ]
       },
       {
@@ -549,7 +489,7 @@
         colours: "5 Colours",
         fabric: "Ribbed Hosiery Knit",
         slides: [
-          { type: 'image', src: 'images/p513_1.jpg' }
+          { type: 'image', src: 'images/p513_1.jpg', fallback: 'p513_1.jpg' }
         ]
       },
       {
@@ -561,13 +501,7 @@
         colours: "5 Colours",
         fabric: "Slub Cotton Knit",
         slides: [
-          { type: 'image', src: 'images/p514_1.jpg' },
-          { type: 'image', src: 'images/p514_2.jpg' },
-          { type: 'image', src: 'images/p514_3.jpg' },
-          { type: 'image', src: 'images/p514_4.jpg' },
-          { type: 'image', src: 'images/p514_5.jpg' },
-          { type: 'image', src: 'images/p514_6.jpg' },
-          { type: 'video', src: 'videos/p514.mp4' }
+          { type: 'image', src: 'images/p514_1.jpg', fallback: 'p514_1.jpg' }
         ]
       },
       {
@@ -579,12 +513,7 @@
         colours: "5 Colours",
         fabric: "Fleece / Winter Knit",
         slides: [
-          { type: 'image', src: 'images/p515_1.jpg' },
-          { type: 'image', src: 'images/p515_2.jpg' },
-          { type: 'image', src: 'images/p515_3.jpg' },
-          { type: 'image', src: 'images/p515_4.jpg' },
-          { type: 'image', src: 'images/p515_5.jpg' },
-          { type: 'video', src: 'videos/p515.mp4' }
+          { type: 'image', src: 'images/p515_1.jpg', fallback: 'p515_1.jpg' }
         ]
       },
       {
@@ -596,12 +525,7 @@
         colours: "5 Colours",
         fabric: "Soft Hosiery",
         slides: [
-          { type: 'image', src: 'images/p516_1.jpg' },
-          { type: 'image', src: 'images/p516_2.jpg' },
-          { type: 'image', src: 'images/p516_3.jpg' },
-          { type: 'image', src: 'images/p516_4.jpg' },
-          { type: 'image', src: 'images/p516_5.jpg' },
-          { type: 'video', src: 'videos/p516.mp4' }
+          { type: 'image', src: 'images/p516_1.jpg', fallback: 'p516_1.jpg' }
         ]
       },
       {
@@ -613,12 +537,7 @@
         colours: "5 Colours",
         fabric: "Cotton Loopknit",
         slides: [
-          { type: 'image', src: 'images/p517_1.jpg' },
-          { type: 'image', src: 'images/p517_2.jpg' },
-          { type: 'image', src: 'images/p517_3.jpg' },
-          { type: 'image', src: 'images/p517_4.jpg' },
-          { type: 'image', src: 'images/p517_5.jpg' },
-          { type: 'video', src: 'videos/p517.mp4' }
+          { type: 'image', src: 'images/p517_1.jpg', fallback: 'p517_1.jpg' }
         ]
       },
       {
@@ -630,12 +549,7 @@
         colours: "5 Colours",
         fabric: "Combed Cotton",
         slides: [
-          { type: 'image', src: 'images/p518_1.jpg' },
-          { type: 'image', src: 'images/p518_2.jpg' },
-          { type: 'image', src: 'images/p518_3.jpg' },
-          { type: 'image', src: 'images/p518_4.jpg' },
-          { type: 'image', src: 'images/p518_5.jpg' },
-          { type: 'video', src: 'videos/p518.mp4' }
+          { type: 'image', src: 'images/p518_1.jpg', fallback: 'p518_1.jpg' }
         ]
       },
       {
@@ -647,12 +561,7 @@
         colours: "5 Colours",
         fabric: "Self-Stripe Hosiery",
         slides: [
-          { type: 'image', src: 'images/p519_1.jpg' },
-          { type: 'image', src: 'images/p519_2.jpg' },
-          { type: 'image', src: 'images/p519_3.jpg' },
-          { type: 'image', src: 'images/p519_4.jpg' },
-          { type: 'image', src: 'images/p519_5.jpg' },
-          { type: 'video', src: 'videos/p519.mp4' }
+          { type: 'image', src: 'images/p519_1.jpg', fallback: 'p519_1.jpg' }
         ]
       },
       {
@@ -664,7 +573,7 @@
         colours: "5 Colours",
         fabric: "Waffle / Textured Knit",
         slides: [
-          { type: 'image', src: 'images/p520_1.jpg' }
+          { type: 'image', src: 'images/p520_1.jpg', fallback: 'p520_1.jpg' }
         ]
       },
       {
@@ -676,12 +585,7 @@
         colours: "5 Colours",
         fabric: "Cotton Terry",
         slides: [
-          { type: 'image', src: 'images/p521_1.jpg' },
-          { type: 'image', src: 'images/p521_2.jpg' },
-          { type: 'image', src: 'images/p521_3.jpg' },
-          { type: 'image', src: 'images/p521_4.jpg' },
-          { type: 'image', src: 'images/p521_5.jpg' },
-          { type: 'video', src: 'videos/p521.mp4' }
+          { type: 'image', src: 'images/p521_1.jpg', fallback: 'p521_1.jpg' }
         ]
       },
       {
@@ -693,12 +597,7 @@
         colours: "5 Colours",
         fabric: "Cotton Hosiery",
         slides: [
-          { type: 'image', src: 'images/p522_1.jpg' },
-          { type: 'image', src: 'images/p522_2.jpg' },
-          { type: 'image', src: 'images/p522_3.jpg' },
-          { type: 'image', src: 'images/p522_4.jpg' },
-          { type: 'image', src: 'images/p522_5.jpg' },
-          { type: 'video', src: 'videos/p522.mp4' }
+          { type: 'image', src: 'images/p522_1.jpg', fallback: 'p522_1.jpg' }
         ]
       },
       {
@@ -710,11 +609,7 @@
         colours: "5 Colours",
         fabric: "AOP Cotton",
         slides: [
-          { type: 'image', src: 'images/p523_1.jpg' },
-          { type: 'image', src: 'images/p523_2.jpg' },
-          { type: 'image', src: 'images/p523_3.jpg' },
-          { type: 'image', src: 'images/p523_4.jpg' },
-          { type: 'image', src: 'images/p523_5.jpg' }
+          { type: 'image', src: 'images/p523_1.jpg', fallback: 'p523_1.jpg' }
         ]
       },
       {
@@ -726,11 +621,7 @@
         colours: "5 Colours",
         fabric: "Heavy Track Terry",
         slides: [
-          { type: 'image', src: 'images/p524_1.jpg' },
-          { type: 'image', src: 'images/p524_2.jpg' },
-          { type: 'image', src: 'images/p524_3.jpg' },
-          { type: 'image', src: 'images/p524_4.jpg' },
-          { type: 'video', src: 'videos/p524.mp4' }
+          { type: 'image', src: 'images/p524_1.jpg', fallback: 'p524_1.jpg' }
         ]
       },
       {
@@ -742,13 +633,7 @@
         colours: "5 Colours",
         fabric: "Heavy Bio-Wash Cotton",
         slides: [
-          { type: 'image', src: 'images/p525_1.jpg' },
-          { type: 'image', src: 'images/p525_2.jpg' },
-          { type: 'image', src: 'images/p525_3.jpg' },
-          { type: 'image', src: 'images/p525_4.jpg' },
-          { type: 'image', src: 'images/p525_5.jpg' },
-          { type: 'image', src: 'images/p525_6.jpg' },
-          { type: 'video', src: 'videos/p525.mp4' }
+          { type: 'image', src: 'images/p525_1.jpg', fallback: 'p525_1.jpg' }
         ]
       },
       {
@@ -760,12 +645,7 @@
         colours: "5 Colours",
         fabric: "Tie & Dye Cotton",
         slides: [
-          { type: 'image', src: 'images/p526_1.jpg' },
-          { type: 'image', src: 'images/p526_2.jpg' },
-          { type: 'image', src: 'images/p526_3.jpg' },
-          { type: 'image', src: 'images/p526_4.jpg' },
-          { type: 'image', src: 'images/p526_5.jpg' },
-          { type: 'image', src: 'images/p526_6.jpg' }
+          { type: 'image', src: 'images/p526_1.jpg', fallback: 'p526_1.jpg' }
         ]
       },
       {
@@ -777,13 +657,7 @@
         colours: "5 Colours",
         fabric: "Slub Cotton Knit",
         slides: [
-          { type: 'image', src: 'images/p527_1.jpg' },
-          { type: 'image', src: 'images/p527_2.jpg' },
-          { type: 'image', src: 'images/p527_3.jpg' },
-          { type: 'image', src: 'images/p527_4.jpg' },
-          { type: 'image', src: 'images/p527_5.jpg' },
-          { type: 'image', src: 'images/p527_6.jpg' },
-          { type: 'video', src: 'videos/p527.mp4' }
+          { type: 'image', src: 'images/p527_1.jpg', fallback: 'p527_1.jpg' }
         ]
       },
       {
@@ -795,13 +669,8 @@
         colours: "4 Colours",
         fabric: "100% COTTON",
         slides: [
-          { type: 'image', src: 'images/p528_1.png' },
-          { type: 'image', src: 'images/p528_2.png' },
-          { type: 'image', src: 'images/p528_3.png' },
-          { type: 'image', src: 'images/p528_4.png' },
-          { type: 'image', src: 'images/p528_5.png' },
-          { type: 'image', src: 'images/p528_6.png' },
-          { type: 'image', src: 'images/p528_7.png' }
+          { type: 'image', src: 'images/p528_1.png', fallback: 'p528_1.png' },
+          { type: 'image', src: 'images/p528_2.png', fallback: 'p528_2.png' }
         ]
       },
       {
@@ -813,10 +682,7 @@
         colours: "24 Colours",
         fabric: "MARS FABRIC",
         slides: [
-          { type: 'image', src: 'images/p529_1.png' },
-          { type: 'image', src: 'images/p529_2.png' },
-          { type: 'image', src: 'images/p529_3.png' },
-          { type: 'image', src: 'images/p529_4.png' }
+          { type: 'image', src: 'images/p529_1.png', fallback: 'p529_1.png' }
         ]
       },
       {
@@ -828,10 +694,7 @@
         colours: "9 Colours",
         fabric: "MARS FABRIC",
         slides: [
-          { type: 'image', src: 'images/p530_1.png' },
-          { type: 'image', src: 'images/p530_2.png' },
-          { type: 'image', src: 'images/p530_3.png' },
-          { type: 'image', src: 'images/p530_4.png' }
+          { type: 'image', src: 'images/p530_1.png', fallback: 'p530_1.png' }
         ]
       }
     ];
@@ -844,13 +707,9 @@
 
       let slidesHtml = prod.slides.map((s, sIdx) => {
         const activeClass = sIdx === 0 ? 'active' : '';
-        if (s.type === 'video') {
-          return `<div class="slide-item ${activeClass}">
-                    <video src="${s.src}" controls playsinline preload="metadata"></video>
-                  </div>`;
-        }
+        const fallbackAttr = s.fallback ? `onerror="if(this.src.indexOf('${s.fallback}')===-1)this.src='${s.fallback}';"` : '';
         return `<div class="slide-item ${activeClass}">
-                  <img src="${s.src}" alt="${prod.name}" loading="lazy">
+                  <img src="${s.src}" alt="${prod.name}" ${fallbackAttr} loading="lazy">
                 </div>`;
       }).join('');
 
@@ -861,7 +720,7 @@
         <div class="slide-counter" id="counter-${pIdx}">1 / ${totalSlides}</div>
       ` : '';
 
-      const waMsg = encodeURIComponent(வணக்கம் DR Garments, Code: ${prod.code} (${prod.name}) பற்றிய ஹோல்சேல் ஆர்டர் விவரங்கள் தேவை.);
+      const waMsg = encodeURIComponent(`வணக்கம் DR Garments, குறியீடு: ${prod.code} (${prod.name}) ஆர்டர் விவரங்கள் தேவை.`);
 
       card.innerHTML = `
         <div class="slider-container" id="slider-${pIdx}">
@@ -869,16 +728,16 @@
           ${navControls}
         </div>
         <div class="card-body">
-          <span class="code-badge">CODE: ${prod.code}</span>
+          <span class="code-badge">குறியீடு: ${prod.code}</span>
           <h3 class="product-title">${prod.name}</h3>
           <div class="price-row">
             <span class="price">${prod.price}</span>
-            <span class="moq">MOQ: ${prod.moq}</span>
+            <span class="moq">குறைந்தபட்ச ஆர்டர்: ${prod.moq}</span>
           </div>
           <table class="specs-table">
-            <tr><td>Sizes</td><td>${prod.sizes}</td></tr>
-            <tr><td>Colours</td><td>${prod.colours}</td></tr>
-            <tr><td>Fabric</td><td>${prod.fabric}</td></tr>
+            <tr><td>அளவுகள்</td><td>${prod.sizes}</td></tr>
+            <tr><td>வண்ணங்கள்</td><td>${prod.colours}</td></tr>
+            <tr><td>துணி ரகம்</td><td>${prod.fabric}</td></tr>
           </table>
           <a href="https://wa.me/919965655991?text=${waMsg}" target="_blank" class="btn-enquiry">
             <span>WhatsApp Enquiry</span>
@@ -889,7 +748,7 @@
     });
 
     function changeSlide(pIdx, step) {
-      const slider = document.getElementById(slider-${pIdx});
+      const slider = document.getElementById(`slider-${pIdx}`);
       const slides = slider.querySelectorAll('.slide-item');
       let currentIndex = 0;
 
@@ -899,19 +758,13 @@
         }
       });
 
-      const currentSlide = slides[currentIndex];
-      const currentVideo = currentSlide.querySelector('video');
-      if (currentVideo) {
-        currentVideo.pause();
-      }
-
-      currentSlide.classList.remove('active');
+      slides[currentIndex].classList.remove('active');
       let nextIndex = (currentIndex + step + slides.length) % slides.length;
       slides[nextIndex].classList.add('active');
 
-      const counter = document.getElementById(counter-${pIdx});
+      const counter = document.getElementById(`counter-${pIdx}`);
       if (counter) {
-        counter.textContent = ${nextIndex + 1} / ${slides.length};
+        counter.textContent = `${nextIndex + 1} / ${slides.length}`;
       }
     }
   </script>
