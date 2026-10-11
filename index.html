@@ -28,7 +28,7 @@
       top: 0;
       z-index: 100;
       border-bottom: 1px solid var(--border);
-      padding: 0.9rem 1.25rem;
+      padding: 0.75rem 1.25rem;
     }
     .nav-container {
       max-width: 900px;
@@ -39,27 +39,52 @@
       flex-wrap: wrap;
       gap: 0.75rem;
     }
-    .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text-main); }
-    .brand-logo {
+    .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-main); }
+    
+    /* New Custom Logo Styling */
+    .brand-logo-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+    }
+    .brand-logo-fallback {
+      display: none;
       background: linear-gradient(135deg, var(--primary), var(--accent));
-      width: 42px; height: 42px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%;
+      align-items: center; justify-content: center;
       font-weight: 800; font-size: 1.2rem; color: #fff;
     }
+
     .brand-text h1 { font-size: 1.15rem; font-weight: 800; }
-    .brand-text p { font-size: 0.72rem; color: var(--accent); font-weight: 600; text-transform: uppercase; }
+    .brand-text p { font-size: 0.72rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .header-badge {
+      background: rgba(201, 24, 43, 0.15);
+      border: 1px solid var(--primary);
+      color: #fca5a5;
+      padding: 0.35rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
 
     .container { max-width: 520px; margin: 1.5rem auto; padding: 0 1rem; }
 
-    /* Manager Form */
+    /* Manager Form Box (Password protected) */
     .manager-box {
+      display: none;
       background: var(--surface);
       border: 2px dashed var(--accent);
       border-radius: 14px;
       padding: 1.2rem;
       margin-bottom: 2rem;
     }
-    .manager-box h3 { color: var(--accent); font-size: 1.1rem; margin-bottom: 1rem; }
+    .manager-box.active { display: block; }
+    .manager-box h3 { color: var(--accent); font-size: 1.1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+    .btn-logout { background: #374151; color: #fff; border: none; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; cursor: pointer; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.6rem; }
     .form-grid input, .manager-box input[type="text"] {
       background: var(--bg);
@@ -167,10 +192,12 @@
       font-weight: 800; font-size: 0.85rem; padding: 0.25rem 0.65rem; border-radius: 6px;
     }
     .btn-remove {
+      display: none;
       background: #ef4444; color: #fff; border: none;
       padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.8rem;
       font-weight: 700; cursor: pointer;
     }
+    .btn-remove.active { display: inline-block; }
     .product-title { font-size: 1.2rem; font-weight: 700; color: #fff; line-height: 1.3; }
     .price-row { display: flex; justify-content: space-between; align-items: baseline; }
     .price { font-size: 1.45rem; font-weight: 800; color: #4ade80; }
@@ -194,6 +221,23 @@
       font-size: 0.95rem;
       font-weight: 700;
     }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+    .btn-admin-login {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -201,20 +245,30 @@
   <header>
     <div class="nav-container">
       <a href="#" class="brand">
-        <div class="brand-logo">DR</div>
+        <!-- New Brand Logo Image -->
+        <img src="logo.png" 
+             id="mainLogo" 
+             class="brand-logo-img" 
+             alt="DR Garments" 
+             onerror="if(!this.dataset.step){this.dataset.step='1';this.src='1002366361.png';}else if(this.dataset.step==='1'){this.dataset.step='2';this.src='./logo.png';}else{this.style.display='none';document.getElementById('fallbackLogo').style.display='flex';}">
+        <div id="fallbackLogo" class="brand-logo-fallback">DR</div>
+        
         <div class="brand-text">
           <h1>DR Garments</h1>
           <p>Tiruppur Wholesale</p>
         </div>
       </a>
-      <span style="font-size: 0.8rem; color: var(--accent); font-weight: 700;">MANAGER PANEL</span>
+      <div class="header-badge">Wholesale Only • Minimum Order Applies</div>
     </div>
   </header>
 
   <div class="container">
-    <!-- Add / Edit Manager Panel -->
-    <div class="manager-box">
-      <h3>+ Add / Manage Product</h3>
+    <!-- Manager Panel (Password Required) -->
+    <div class="manager-box" id="managerBox">
+      <h3>
+        <span>+ Add / Manage Product</span>
+        <button class="btn-logout" onclick="adminLogout()">Logout</button>
+      </h3>
       <div class="form-grid">
         <input type="text" id="inpCode" placeholder="Code" value="529">
         <input type="text" id="inpPrice" placeholder="Price" value="₹299 / Piece">
@@ -243,8 +297,15 @@
     <div id="catalogueList"></div>
   </div>
 
+  <footer>
+    <p>DR Garments • Tiruppur Wholesale</p>
+    <button class="btn-admin-login" onclick="promptAdminLogin()">🔒 Admin Login</button>
+  </footer>
+
   <script>
-    // Initial Code-529 product setup with local/repo fallback files
+    const ADMIN_KEY = "dr9965";
+    let isAdminLoggedIn = false;
+
     let catalogueData = [
       {
         id: "prod_529",
@@ -264,6 +325,24 @@
         ]
       }
     ];
+
+    function promptAdminLogin() {
+      const enteredPass = prompt("Enter Admin Password:");
+      if (enteredPass === ADMIN_KEY) {
+        isAdminLoggedIn = true;
+        document.getElementById('managerBox').classList.add('active');
+        renderCards();
+        alert("Login successful! Manager panel opened.");
+      } else if (enteredPass !== null) {
+        alert("Incorrect password!");
+      }
+    }
+
+    function adminLogout() {
+      isAdminLoggedIn = false;
+      document.getElementById('managerBox').classList.remove('active');
+      renderCards();
+    }
 
     function renderCards() {
       const target = document.getElementById('catalogueList');
@@ -299,6 +378,7 @@
           <div class="slide-counter" id="counter-${pIdx}">1 / ${total}</div>
         ` : '';
 
+        const removeBtnClass = isAdminLoggedIn ? 'btn-remove active' : 'btn-remove';
         const waUrl = "https://wa.me/919965655991?text=" + encodeURIComponent(`Hello DR Garments, enquiry for Code: ${item.code} (${item.title})`);
 
         card.innerHTML = `
@@ -309,7 +389,7 @@
           <div class="card-body">
             <div class="top-meta">
               <span class="code-badge">Code: ${item.code}</span>
-              <button class="btn-remove" onclick="removeCard('${item.id}')">Remove</button>
+              <button class="${removeBtnClass}" onclick="removeCard('${item.id}')">Remove</button>
             </div>
             <h3 class="product-title">${item.title}</h3>
             <div class="price-row">
