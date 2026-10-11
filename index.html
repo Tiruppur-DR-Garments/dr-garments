@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DR Garments - Wholesale Clothing Tiruppur</title>
+  <title>DR Garments - Wholesale Catalogue</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -48,24 +48,52 @@
     }
     .brand-text h1 { font-size: 1.15rem; font-weight: 800; }
     .brand-text p { font-size: 0.72rem; color: var(--accent); font-weight: 600; text-transform: uppercase; }
-    .header-badge {
-      background: rgba(201, 24, 43, 0.15);
-      border: 1px solid var(--primary);
-      color: #fca5a5;
-      padding: 0.35rem 0.75rem;
-      border-radius: 50px;
-      font-size: 0.78rem;
+
+    .container { max-width: 520px; margin: 1.5rem auto; padding: 0 1rem; }
+
+    /* Manager Form Box */
+    .manager-box {
+      background: var(--surface);
+      border: 1px dashed var(--accent);
+      border-radius: 14px;
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .manager-box h3 { color: var(--accent); font-size: 1.1rem; margin-bottom: 1rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.6rem; }
+    .form-grid input, .manager-box input[type="text"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 0.6rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      width: 100%;
+    }
+    .file-row {
+      margin: 0.8rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      background: rgba(0,0,0,0.3);
+      padding: 0.8rem;
+      border-radius: 8px;
+    }
+    .file-row label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+    .file-row input[type="file"] { font-size: 0.8rem; color: #cbd5e1; }
+    .btn-add {
+      width: 100%;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 8px;
       font-weight: 700;
-      text-transform: uppercase;
+      cursor: pointer;
+      font-size: 0.95rem;
     }
 
-    .hero { text-align: center; padding: 2rem 1rem 1.5rem; max-width: 800px; margin: 0 auto; }
-    .hero h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.4rem; color: #fff; }
-    .hero p { color: var(--text-muted); font-size: 0.92rem; }
-
-    .container { max-width: 520px; margin: 0 auto; padding: 0 1rem; }
-
-    /* Single Product Card */
+    /* Product Card */
     .card {
       background: var(--surface-card);
       border: 1px solid var(--border);
@@ -73,7 +101,8 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
     }
     .slider-container {
       position: relative;
@@ -130,24 +159,29 @@
       color: #fff;
     }
 
-    .card-body { padding: 1.4rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .card-body { padding: 1.3rem; display: flex; flex-direction: column; gap: 0.7rem; }
+    .top-meta { display: flex; justify-content: space-between; align-items: center; }
     .code-badge {
-      display: inline-block; align-self: flex-start;
       background: rgba(245, 158, 11, 0.15); color: var(--accent);
       border: 1px solid rgba(245, 158, 11, 0.4);
       font-weight: 800; font-size: 0.85rem; padding: 0.25rem 0.65rem; border-radius: 6px;
     }
-    .product-title { font-size: 1.25rem; font-weight: 700; color: #fff; line-height: 1.3; }
-    .price-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.2rem; }
-    .price { font-size: 1.5rem; font-weight: 800; color: #4ade80; }
+    .btn-remove {
+      background: #ef4444; color: #fff; border: none;
+      padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.75rem;
+      font-weight: 700; cursor: pointer;
+    }
+    .product-title { font-size: 1.2rem; font-weight: 700; color: #fff; line-height: 1.3; }
+    .price-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .price { font-size: 1.45rem; font-weight: 800; color: #4ade80; }
     .moq { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
-    .specs-table { width: 100%; border-collapse: collapse; margin-top: 0.4rem; font-size: 0.88rem; }
-    .specs-table td { padding: 0.4rem 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .specs-table { width: 100%; border-collapse: collapse; margin-top: 0.2rem; font-size: 0.88rem; }
+    .specs-table td { padding: 0.35rem 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
     .specs-table td:first-child { color: var(--text-muted); width: 35%; }
     .specs-table td:last-child { color: #fff; font-weight: 600; }
     
     .btn-enquiry {
-      margin-top: 0.5rem;
+      margin-top: 0.4rem;
       background: var(--whatsapp);
       color: #fff;
       text-decoration: none;
@@ -155,40 +189,10 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      padding: 0.85rem;
+      padding: 0.8rem;
       border-radius: 10px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
-    }
-
-    /* Editable Settings Box */
-    .edit-box {
-      margin-top: 2rem;
-      background: var(--surface);
-      border: 1px dashed var(--border);
-      border-radius: 12px;
-      padding: 1.2rem;
-    }
-    .edit-box h4 { color: var(--accent); font-size: 0.95rem; margin-bottom: 0.8rem; }
-    .edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
-    .edit-grid input {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: #fff;
-      padding: 0.55rem;
-      border-radius: 6px;
-      font-size: 0.82rem;
-    }
-    .btn-save-edit {
-      width: 100%;
-      margin-top: 0.75rem;
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      padding: 0.65rem;
-      border-radius: 6px;
-      font-weight: 700;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -203,115 +207,199 @@
           <p>Tiruppur Wholesale</p>
         </div>
       </a>
-      <div class="header-badge">Wholesale Only • Minimum Order Applies</div>
+      <span style="font-size: 0.8rem; color: var(--accent); font-weight: 700;">CATALOGUE MANAGER</span>
     </div>
   </header>
 
-  <div class="hero">
-    <h2>Wholesale Product Catalogue</h2>
-    <p>Premium Quality Knitted Garments Direct from Tiruppur Factory.</p>
-  </div>
-
   <div class="container">
-    <div class="card">
-      <!-- 5 Photos + 1 Video Slider -->
-      <div class="slider-container" id="productSlider">
-        <div class="slide-item active">
-          <img src="FB_IMG_1791544846969.jpg" onerror="this.src='./FB_IMG_1791544846969.jpg'" alt="Slide 1">
+    <!-- Add / Edit Manager Panel -->
+    <div class="manager-box">
+      <h3>+ Add / Update Product</h3>
+      <div class="form-grid">
+        <input type="text" id="inpCode" placeholder="Code (e.g. 501)" value="501">
+        <input type="text" id="inpPrice" placeholder="Price (e.g. ₹215 / Piece)" value="₹215 / Piece">
+        <input type="text" id="inpSizes" placeholder="Sizes (e.g. L | XL | XXL)" value="L | XL | XXL">
+        <input type="text" id="inpMoq" placeholder="MOQ (e.g. 100 Pieces)" value="100 Pieces">
+        <input type="text" id="inpColours" placeholder="Colours (e.g. 5 Colours)" value="5 Colours">
+        <input type="text" id="inpFabric" placeholder="Fabric (e.g. Cotton Knit)" value="Cotton Knit">
+      </div>
+      <input type="text" id="inpTitle" placeholder="Product Title" value="Ladies Nightwear Set – Top + Pant" style="margin-bottom: 0.8rem;">
+
+      <div class="file-row">
+        <div>
+          <label>Select up to 5 Photos (from phone)</label>
+          <input type="file" id="inpPhotos" accept="image/*" multiple>
         </div>
-        <div class="slide-item">
-          <img src="FB_IMG_1791544849680.jpg" onerror="this.src='./FB_IMG_1791544849680.jpg'" alt="Slide 2">
+        <div>
+          <label>Select 1 Video (from phone)</label>
+          <input type="file" id="inpVideo" accept="video/*">
         </div>
-        <div class="slide-item">
-          <img src="FB_IMG_1791544851819.jpg" onerror="this.src='./FB_IMG_1791544851819.jpg'" alt="Slide 3">
-        </div>
-        <div class="slide-item">
-          <img src="FB_IMG_1791544853695.jpg" onerror="this.src='./FB_IMG_1791544853695.jpg'" alt="Slide 4">
-        </div>
-        <div class="slide-item">
-          <img src="FB_IMG_1791544856267.jpg" onerror="this.src='./FB_IMG_1791544856267.jpg'" alt="Slide 5">
-        </div>
-        <div class="slide-item">
-          <video controls playsinline preload="metadata">
-            <source src="AhaConvert_1791545754_q5iYt87g89g8e6d0a790510daea67280.mp4" type="video/mp4">
-          </video>
-        </div>
-        <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
-        <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
-        <div class="slide-counter" id="slideCount">1 / 6</div>
       </div>
 
-      <div class="card-body">
-        <span class="code-badge" id="dispCode">Code: 501</span>
-        <h3 class="product-title" id="dispTitle">Ladies Nightwear Set – Top + Pant</h3>
-        <div class="price-row">
-          <span class="price" id="dispPrice">₹215 / Piece</span>
-          <span class="moq" id="dispMoq">Min Order: 100 Pieces</span>
-        </div>
-        <table class="specs-table">
-          <tr><td>Sizes</td><td id="dispSizes">L | XL | XXL</td></tr>
-          <tr><td>Colours</td><td id="dispColours">5 Colours</td></tr>
-          <tr><td>Fabric</td><td id="dispFabric">Cotton Knit</td></tr>
-        </table>
-        <a id="waLink" href="https://wa.me/919965655991?text=Hello%20DR%20Garments,%20I%20am%20interested%20in%20Code:%20501" target="_blank" class="btn-enquiry">
-          WhatsApp Enquiry
-        </a>
-      </div>
+      <button class="btn-add" onclick="saveProduct()">+ Add to Catalogue</button>
     </div>
 
-    <!-- Live Editable Options -->
-    <div class="edit-box">
-      <h4>Edit Product Details Directly</h4>
-      <div class="edit-grid">
-        <input type="text" id="editCode" value="501" placeholder="Code">
-        <input type="text" id="editPrice" value="₹215 / Piece" placeholder="Price">
-        <input type="text" id="editSizes" value="L | XL | XXL" placeholder="Sizes">
-        <input type="text" id="editMoq" value="100 Pieces" placeholder="MOQ">
-        <input type="text" id="editColours" value="5 Colours" placeholder="Colours">
-        <input type="text" id="editFabric" value="Cotton Knit" placeholder="Fabric">
-      </div>
-      <input type="text" id="editTitle" value="Ladies Nightwear Set – Top + Pant" placeholder="Title" style="width: 100%; margin-top: 0.6rem; background: var(--bg); border: 1px solid var(--border); color: #fff; padding: 0.55rem; border-radius: 6px; font-size: 0.82rem;">
-      <button class="btn-save-edit" onclick="applyEdits()">Update Product Details</button>
-    </div>
+    <!-- Product Display Area -->
+    <div id="catalogueList"></div>
   </div>
 
   <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide-item');
-    const counter = document.getElementById('slideCount');
+    // Initial dummy data with root fallback
+    const defaultData = [
+      {
+        id: "prod_1",
+        code: "501",
+        title: "Ladies Nightwear Set – Top + Pant",
+        price: "₹215 / Piece",
+        moq: "100 Pieces",
+        sizes: "L | XL | XXL",
+        colours: "5 Colours",
+        fabric: "Cotton Knit",
+        slides: [
+          { type: 'image', src: 'FB_IMG_1791544846969.jpg' },
+          { type: 'image', src: 'FB_IMG_1791544849680.jpg' },
+          { type: 'image', src: 'FB_IMG_1791544851819.jpg' },
+          { type: 'image', src: 'FB_IMG_1791544853695.jpg' },
+          { type: 'image', src: 'FB_IMG_1791544856267.jpg' },
+          { type: 'video', src: 'AhaConvert_1791545754_q5iYt87g89g8e6d0a790510daea67280.mp4' }
+        ]
+      }
+    ];
 
-    function changeSlide(step) {
-      slides[currentSlide].classList.remove('active');
-      const currentVideo = slides[currentSlide].querySelector('video');
-      if (currentVideo) currentVideo.pause();
+    let items = JSON.parse(localStorage.getItem('dr_items')) || defaultData;
 
-      currentSlide = (currentSlide + step + slides.length) % slides.length;
-      slides[currentSlide].classList.add('active');
-      counter.textContent = (currentSlide + 1) + " / " + slides.length;
+    function renderCatalogue() {
+      const target = document.getElementById('catalogueList');
+      target.innerHTML = '';
+
+      items.forEach((p, pIdx) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        let slidesMarkup = p.slides.map((s, sIdx) => {
+          const activeClass = sIdx === 0 ? 'active' : '';
+          if (s.type === 'video') {
+            return `
+              <div class="slide-item ${activeClass}">
+                <video controls playsinline preload="metadata">
+                  <source src="${s.src}" type="video/mp4">
+                </video>
+              </div>`;
+          } else {
+            return `
+              <div class="slide-item ${activeClass}">
+                <img src="${s.src}" onerror="this.src='./${s.src}'" alt="${p.title}">
+              </div>`;
+          }
+        }).join('');
+
+        const total = p.slides.length;
+        const nav = total > 1 ? `
+          <button class="slider-btn prev" onclick="moveSlide(${pIdx}, -1)">&#10094;</button>
+          <button class="slider-btn next" onclick="moveSlide(${pIdx}, 1)">&#10095;</button>
+          <div class="slide-counter" id="counter-${pIdx}">1 / ${total}</div>
+        ` : '';
+
+        const waUrl = "https://wa.me/919965655991?text=" + encodeURIComponent(`Hello DR Garments, enquiry for Code: ${p.code} (${p.title})`);
+
+        card.innerHTML = `
+          <div class="slider-container" id="slider-${pIdx}">
+            ${slidesMarkup}
+            ${nav}
+          </div>
+          <div class="card-body">
+            <div class="top-meta">
+              <span class="code-badge">Code: ${p.code}</span>
+              <button class="btn-remove" onclick="deleteProduct('${p.id}')">Remove</button>
+            </div>
+            <h3 class="product-title">${p.title}</h3>
+            <div class="price-row">
+              <span class="price">${p.price}</span>
+              <span class="moq">Min Order: ${p.moq}</span>
+            </div>
+            <table class="specs-table">
+              <tr><td>Sizes</td><td>${p.sizes}</td></tr>
+              <tr><td>Colours</td><td>${p.colours}</td></tr>
+              <tr><td>Fabric</td><td>${p.fabric}</td></tr>
+            </table>
+            <a href="${waUrl}" target="_blank" class="btn-enquiry">WhatsApp Enquiry</a>
+          </div>
+        `;
+        target.appendChild(card);
+      });
     }
 
-    function applyEdits() {
-      const code = document.getElementById('editCode').value;
-      const title = document.getElementById('editTitle').value;
-      const price = document.getElementById('editPrice').value;
-      const moq = document.getElementById('editMoq').value;
-      const sizes = document.getElementById('editSizes').value;
-      const colours = document.getElementById('editColours').value;
-      const fabric = document.getElementById('editFabric').value;
+    function moveSlide(pIdx, step) {
+      const box = document.getElementById(`slider-${pIdx}`);
+      const slides = box.querySelectorAll('.slide-item');
+      let cur = 0;
+      slides.forEach((s, idx) => { if(s.classList.contains('active')) cur = idx; });
+      slides[cur].classList.remove('active');
+      const curVid = slides[cur].querySelector('video');
+      if (curVid) curVid.pause();
 
-      document.getElementById('dispCode').textContent = "Code: " + code;
-      document.getElementById('dispTitle').textContent = title;
-      document.getElementById('dispPrice').textContent = price;
-      document.getElementById('dispMoq').textContent = "Min Order: " + moq;
-      document.getElementById('dispSizes').textContent = sizes;
-      document.getElementById('dispColours').textContent = colours;
-      document.getElementById('dispFabric').textContent = fabric;
-
-      const waMsg = encodeURIComponent("Hello DR Garments, I am interested in Code: " + code + " (" + title + ")");
-      document.getElementById('waLink').href = "https://wa.me/919965655991?text=" + waMsg;
-
-      alert("Updated successfully!");
+      let next = (cur + step + slides.length) % slides.length;
+      slides[next].classList.add('active');
+      document.getElementById(`counter-${pIdx}`).textContent = `${next + 1} / ${slides.length}`;
     }
+
+    function fileToData(file) {
+      return new Promise((res) => {
+        const reader = new FileReader();
+        reader.onload = (e) => res(e.target.result);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function saveProduct() {
+      const code = document.getElementById('inpCode').value;
+      const title = document.getElementById('inpTitle').value;
+      const price = document.getElementById('inpPrice').value;
+      const moq = document.getElementById('inpMoq').value;
+      const sizes = document.getElementById('inpSizes').value;
+      const colours = document.getElementById('inpColours').value;
+      const fabric = document.getElementById('inpFabric').value;
+
+      const pFiles = document.getElementById('inpPhotos').files;
+      const vFiles = document.getElementById('inpVideo').files;
+
+      let slideList = [];
+
+      for (let i = 0; i < Math.min(pFiles.length, 5); i++) {
+        const url = await fileToData(pFiles[i]);
+        slideList.push({ type: 'image', src: url });
+      }
+
+      if (vFiles.length > 0) {
+        const vidUrl = await fileToData(vFiles[0]);
+        slideList.push({ type: 'video', src: vidUrl });
+      }
+
+      if (slideList.length === 0) {
+        slideList = defaultData[0].slides;
+      }
+
+      const item = {
+        id: "p_" + Date.now(),
+        code, title, price, moq, sizes, colours, fabric,
+        slides: slideList
+      };
+
+      items.unshift(item);
+      localStorage.setItem('dr_items', JSON.stringify(items));
+      renderCatalogue();
+      alert("Product added successfully!");
+    }
+
+    function deleteProduct(id) {
+      if(confirm("Do you want to remove this product?")) {
+        items = items.filter(x => x.id !== id);
+        localStorage.setItem('dr_items', JSON.stringify(items));
+        renderCatalogue();
+      }
+    }
+
+    renderCatalogue();
   </script>
 </body>
 </html>
