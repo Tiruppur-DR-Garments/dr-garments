@@ -19,20 +19,8 @@
       --border: #2e3446;
       --whatsapp: #25d366;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      line-height: 1.5;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; }
     header {
       background: rgba(24, 27, 36, 0.95);
       position: sticky;
@@ -41,7 +29,6 @@
       border-bottom: 1px solid var(--border);
       padding: 0.9rem 1.25rem;
     }
-
     .nav-container {
       max-width: 1300px;
       margin: 0 auto;
@@ -51,42 +38,15 @@
       flex-wrap: wrap;
       gap: 0.75rem;
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      text-decoration: none;
-      color: var(--text-main);
-    }
-
+    .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text-main); }
     .brand-logo {
       background: linear-gradient(135deg, var(--primary), var(--accent));
-      width: 42px;
-      height: 42px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: #fff;
+      width: 42px; height: 42px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.2rem; color: #fff;
     }
-
-    .brand-text h1 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-    }
-
-    .brand-text p {
-      font-size: 0.72rem;
-      color: var(--accent);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
+    .brand-text h1 { font-size: 1.15rem; font-weight: 800; }
+    .brand-text p { font-size: 0.72rem; color: var(--accent); font-weight: 600; text-transform: uppercase; }
     .header-badge {
       background: rgba(201, 24, 43, 0.15);
       border: 1px solid var(--primary);
@@ -97,38 +57,15 @@
       font-weight: 700;
       text-transform: uppercase;
     }
-
-    .hero {
-      text-align: center;
-      padding: 2.5rem 1rem 1.5rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .hero h2 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      color: #fff;
-    }
-
-    .hero p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    .container {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 1rem 1.25rem 4rem;
-    }
-
+    .hero { text-align: center; padding: 2rem 1rem 1rem; max-width: 800px; margin: 0 auto; }
+    .hero h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff; }
+    .hero p { color: var(--text-muted); font-size: 0.95rem; }
+    .container { max-width: 1300px; margin: 0 auto; padding: 1rem 1.25rem 4rem; }
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
       gap: 1.75rem;
     }
-
     .card {
       background: var(--surface-card);
       border: 1px solid var(--border);
@@ -137,138 +74,35 @@
       display: flex;
       flex-direction: column;
     }
-
-    .slider-container {
-      position: relative;
+    .img-box {
       width: 100%;
       height: 380px;
-      background: #11141c;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-
-    .slide-item {
-      display: none;
-      width: 100%;
-      height: 100%;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .slide-item.active {
-      display: flex;
-    }
-
-    .slide-item img {
+    .img-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      background: #11141c;
     }
-
-    .slider-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(15, 17, 23, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #fff;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      z-index: 5;
-    }
-
-    .slider-btn.prev { left: 8px; }
-    .slider-btn.next { right: 8px; }
-
-    .slide-counter {
-      position: absolute;
-      bottom: 8px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.75);
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .card-body {
-      padding: 1.1rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      gap: 0.6rem;
-    }
-
+    .card-body { padding: 1.1rem; display: flex; flex-direction: column; flex-grow: 1; gap: 0.6rem; }
     .code-badge {
-      display: inline-block;
-      align-self: flex-start;
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--accent);
+      display: inline-block; align-self: flex-start;
+      background: rgba(245, 158, 11, 0.15); color: var(--accent);
       border: 1px solid rgba(245, 158, 11, 0.4);
-      font-weight: 800;
-      font-size: 0.78rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
+      font-weight: 800; font-size: 0.78rem; padding: 0.2rem 0.55rem; border-radius: 6px;
     }
-
-    .product-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.35;
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-top: 0.2rem;
-    }
-
-    .price {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #4ade80;
-    }
-
-    .moq {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .specs-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 0.4rem;
-      font-size: 0.8rem;
-    }
-
-    .specs-table td {
-      padding: 0.25rem 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .specs-table td:first-child {
-      color: var(--text-muted);
-      width: 32%;
-    }
-
-    .specs-table td:last-child {
-      color: #e2e8f0;
-      font-weight: 600;
-    }
-
+    .product-title { font-size: 1rem; font-weight: 700; color: #fff; }
+    .price-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.2rem; }
+    .price { font-size: 1.35rem; font-weight: 800; color: #4ade80; }
+    .moq { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+    .specs-table { width: 100%; border-collapse: collapse; margin-top: 0.4rem; font-size: 0.8rem; }
+    .specs-table td { padding: 0.25rem 0; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+    .specs-table td:first-child { color: var(--text-muted); width: 32%; }
+    .specs-table td:last-child { color: #e2e8f0; font-weight: 600; }
     .btn-enquiry {
       margin-top: auto;
       background: var(--whatsapp);
@@ -283,7 +117,6 @@
       font-size: 0.88rem;
       font-weight: 700;
     }
-
     footer {
       border-top: 1px solid var(--border);
       background: var(--surface);
@@ -324,8 +157,8 @@
   </footer>
 
   <script>
-    // GitHub repository-il irukkira unmaiyaana file names
-    const uploadedFiles = [
+    // Exact filenames from your GitHub root directory
+    const repoImages = [
       "FB_IMG_1791544846969.jpg",
       "FB_IMG_1791544849680.jpg",
       "FB_IMG_1791544851819.jpg",
@@ -383,35 +216,21 @@
 
     const grid = document.getElementById('catalogueGrid');
 
-    function autoFixImg(img, baseName) {
-      if (!img.dataset.attempt) {
-        img.dataset.attempt = "1";
-        img.src = "./" + baseName;
-      } else if (img.dataset.attempt === "1") {
-        img.dataset.attempt = "2";
-        img.src = "images/" + baseName;
-      } else if (img.dataset.attempt === "2") {
-        img.dataset.attempt = "3";
-        img.src = "./images/" + baseName;
-      }
-    }
-
     products.forEach((prod, pIdx) => {
       const card = document.createElement('div');
       card.className = 'card';
 
-      // Ulla irukkira actual file names-ai direct-ah map seigirom
-      const fileName = uploadedFiles[pIdx % uploadedFiles.length];
+      // Direct absolute repo path ensures GitHub Pages always finds the image
+      const fileName = repoImages[pIdx % repoImages.length];
+      const fullPath = '/dr-garments/' + fileName;
 
       const waMsg = encodeURIComponent(`Hello DR Garments, I would like to enquire about Product Code: ${prod.code} (${prod.name}).`);
 
       card.innerHTML = `
-        <div class="slider-container" id="slider-${pIdx}">
-          <div class="slide-item active">
-            <img src="${fileName}" 
-                 onerror="autoFixImg(this, '${fileName}')" 
-                 alt="${prod.name}" loading="lazy">
-          </div>
+        <div class="img-box">
+          <img src="${fullPath}" 
+               onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/${fileName}';" 
+               alt="${prod.name}">
         </div>
         <div class="card-body">
           <span class="code-badge">Code: ${prod.code}</span>
@@ -426,7 +245,7 @@
             <tr><td>Fabric</td><td>${prod.fabric}</td></tr>
           </table>
           <a href="https://wa.me/919965655991?text=${waMsg}" target="_blank" class="btn-enquiry">
-            <span>WhatsApp Enquiry</span>
+            WhatsApp Enquiry
           </a>
         </div>
       `;
