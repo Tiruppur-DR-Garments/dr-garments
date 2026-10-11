@@ -20,7 +20,7 @@
       --whatsapp: #25d366;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding-bottom: 4rem; }
+    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding-bottom: 5rem; }
     
     header {
       background: rgba(24, 27, 36, 0.95);
@@ -42,8 +42,8 @@
     .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-main); }
     
     .brand-logo-img {
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       object-fit: cover;
       box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
@@ -72,7 +72,7 @@
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 1.75rem;
     }
 
@@ -85,19 +85,59 @@
       flex-direction: column;
       box-shadow: 0 8px 24px rgba(0,0,0,0.5);
     }
-    .img-box {
+    .slider-container {
+      position: relative;
       width: 100%;
-      height: 380px;
+      height: 420px;
       background: #000;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
-    .img-box img {
+    .slide-item {
+      display: none;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide-item.active { display: flex; }
+    .slide-item img, .slide-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 17, 23, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      z-index: 5;
+    }
+    .slider-btn.prev { left: 8px; }
+    .slider-btn.next { right: 8px; }
+    .slide-counter {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
     }
 
     .card-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.65rem; flex-grow: 1; }
@@ -139,6 +179,14 @@
       font-size: 0.85rem;
       border-top: 1px solid var(--border);
     }
+    .loading-msg {
+      text-align: center;
+      grid-column: 1 / -1;
+      padding: 3rem;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
   </style>
 </head>
 <body>
@@ -149,7 +197,7 @@
         <img src="1002366361.png" 
              class="brand-logo-img" 
              alt="DR Garments"
-             onerror="this.src='./1002366361.png';">
+             onerror="this.src='https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002366361.png';">
         <div class="brand-text">
           <h1>DR Garments</h1>
           <p>Tiruppur Wholesale</p>
@@ -161,11 +209,13 @@
 
   <div class="hero">
     <h2>Wholesale Product Catalogue</h2>
-    <p>Direct Factory Wholesale Supply • Minimum Order Quantity Applies</p>
+    <p>Premium Quality Direct Factory Wholesale Supply • Minimum Order Quantity Applies</p>
   </div>
 
   <div class="container">
-    <div class="product-grid" id="catalogueGrid"></div>
+    <div class="product-grid" id="catalogueGrid">
+      <div class="loading-msg">Loading Catalogue & Media...</div>
+    </div>
   </div>
 
   <footer>
@@ -174,76 +224,153 @@
   </footer>
 
   <script>
-    const BASE_RAW = "https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/";
-
-    // Ungaloda 30 products list
     const products = [
-      { code: "501", name: "Ladies Nightwear Set – Top + Pant", price: "₹215 / Piece", moq: "100 Pieces", sizes: "L | XL | XXL", colours: "5 Colours", fabric: "Cotton Knit", img: "FB_IMG_1791544846969.jpg" },
-      { code: "502", name: "Girls Casual Wear – Top + Pant Set", price: "₹185 / Piece", moq: "100 Pieces", sizes: "M | L | XL", colours: "5 Colours", fabric: "Bio-Wash Cotton", img: "FB_IMG_1791544849680.jpg" },
-      { code: "503", name: "Boys Printed T-Shirt & Track Pant", price: "₹175 / Piece", moq: "100 Pieces", sizes: "24 | 26 | 28 | 30", colours: "5 Colours", fabric: "100% Cotton", img: "FB_IMG_1791544851819.jpg" },
-      { code: "504", name: "Ladies Dailywear Lounge Set", price: "₹220 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "4 Colours", fabric: "Soft Rayon/Cotton", img: "FB_IMG_1791544853695.jpg" },
-      { code: "505", name: "Kids Unisex Cotton Loungewear", price: "₹160 / Piece", moq: "100 Pieces", sizes: "20 | 22 | 24 | 26 | 28", colours: "6 Colours", fabric: "Combed Cotton", img: "FB_IMG_1791544856267.jpg" },
-      { code: "506", name: "Mens Premium Round Neck T-Shirt", price: "₹145 / Piece", moq: "100 Pieces", sizes: "M | L | XL | XXL", colours: "6 Colours", fabric: "Single Jersey Cotton", img: "FB_IMG_1791544859011.jpg" },
-      { code: "507", name: "Girls Fancy Printed Top & Bottom Set", price: "₹190 / Piece", moq: "100 Pieces", sizes: "22 | 24 | 26 | 28 | 30", colours: "5 Colours", fabric: "Soft Hosiery Cotton", img: "FB_IMG_1791544862972.jpg" },
-      { code: "508", name: "Boys Summer Cotton Shorts & Tee Set", price: "₹165 / Piece", moq: "100 Pieces", sizes: "20 to 30", colours: "5 Colours", fabric: "100% Combed Cotton", img: "FB_IMG_1791544864888.jpg" },
-      { code: "509", name: "Ladies Collar Set – Top + Pant", price: "₹228 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "5 Colours", fabric: "Premium Cotton Blend", img: "FB_IMG_1791544867019.jpg" },
-      { code: "510", name: "Ladies Stone Work Set – Top + Pant", price: "₹228 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "5 Colours", fabric: "Textured Cotton Knit", img: "FB_IMG_1791544870244.jpg" },
-      { code: "511", name: "Kids Printed Set – Top + Pant", price: "₹124 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Ribbed Cotton", img: "file_000000000ec82088e42fb8218683e950.jpg" },
-      { code: "512", name: "Girls Puff Printed Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "Soft Hosiery", img: "file_00000000126c820881662ca393c52a37.jpg" },
-      { code: "513", name: "Girls Stone Set – Top + Pant", price: "₹163 / Piece", moq: "100 Pieces", sizes: "2 / 4 / 6 / 8 / 10 / 12 (Age: 2-10)", colours: "5 Colours", fabric: "Ribbed Hosiery Knit", img: "file_000000002d648211b5a369fe4e222955.jpg" },
-      { code: "514", name: "Boys Full Sleeve Set – Top + Pant", price: "₹140 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Slub Cotton Knit", img: "file_000000005fc48211a35e4afa06ff0ee3.jpg" },
-      { code: "515", name: "Boys Full Sleeve High Neck Set – Top + Pant", price: "₹143 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Fleece / Winter Knit", img: "file_0000000079f482088cca7a1c72f7fb54.jpg" },
-      { code: "516", name: "Girls Stone Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "Soft Hosiery", img: "file_00000000a20c8208bf3b43db8eb6a7c4.jpg" },
-      { code: "517", name: "Boys High Neck Set – Top + Pant", price: "₹130 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Cotton Loopknit", img: "file_00000000b2b48208b1d8a93e36e637a2.jpg" },
-      { code: "518", name: "Girls Half Sleeve Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "Combed Cotton", img: "file_00000000b464820b930c698656127118.jpg" },
-      { code: "519", name: "Girls Half Sleeve Set – Top + Pant", price: "₹134 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "Self-Stripe Hosiery", img: "file_00000000b9f48208a12a4b64a2f89f92.jpg" },
-      { code: "520", name: "Boys Full Sleeve Set – Top + Pant", price: "₹130 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Waffle / Textured Knit", img: "file_00000000c224820bbdc9fa50257e3c9c.jpg" },
-      { code: "521", name: "Boys Full Sleeve Sports Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Cotton Terry", img: "FB_IMG_1791544846969.jpg" },
-      { code: "522", name: "Girls Half Sleeve Set – Top + Pant", price: "₹134 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "Cotton Hosiery", img: "FB_IMG_1791544849680.jpg" },
-      { code: "523", name: "Girls All Over Print Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / 2XL / 3XL / 4XL (Age: 2-10)", colours: "5 Colours", fabric: "AOP Cotton", img: "FB_IMG_1791544851819.jpg" },
-      { code: "524", name: "Unisex Set (Girls & Boys) – Top + Pant", price: "₹195 / Piece", moq: "100 Pieces", sizes: "2 / 4 / 6 / 8 / 10 / 12", colours: "5 Colours", fabric: "Heavy Track Terry", img: "FB_IMG_1791544853695.jpg" },
-      { code: "525", name: "Unisex Set (Girls & Boys) – Top + Pant", price: "₹202 / Piece", moq: "100 Pieces", sizes: "2 / 4 / 6 / 8 / 10 / 12", colours: "5 Colours", fabric: "Heavy Bio-Wash Cotton", img: "FB_IMG_1791544856267.jpg" },
-      { code: "526", name: "Unisex All Over Printed Set – Top + Pant", price: "₹172 / Piece", moq: "100 Pieces", sizes: "2 / 4 / 6 / 8 / 10 / 12", colours: "5 Colours", fabric: "Tie & Dye Cotton", img: "FB_IMG_1791544859011.jpg" },
-      { code: "527", name: "Boys Round Neck Set – Top + Pant", price: "₹124 / Piece", moq: "100 Pieces", sizes: "40 / 45 / 50 / 55 / 60 / 65 (Age: 2-10)", colours: "5 Colours", fabric: "Slub Cotton Knit", img: "FB_IMG_1791544862972.jpg" },
-      { code: "528", name: "Mens Polo T-Shirt with Pocket", price: "₹199 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "4 Colours", fabric: "100% Cotton", img: "FB_IMG_1791544864888.jpg" },
-      { code: "529", name: "Mens Polo T-Shirt (Premium Look)", price: "₹299 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "24 Colours", fabric: "MARS FABRIC", img: "1002372112.png" },
-      { code: "530", name: "Mens Polo T-Shirt", price: "₹240 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "9 Colours", fabric: "MARS FABRIC", img: "1002372104.png" }
+      { code: "529", name: "Mens Polo T-Shirt (Premium Look)", price: "₹299 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "24 Colours", fabric: "MARS FABRIC" },
+      { code: "530", name: "Mens Polo T-Shirt", price: "₹240 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "9 Colours", fabric: "MARS FABRIC" },
+      { code: "501", name: "Ladies Nightwear Set – Top + Pant", price: "₹215 / Piece", moq: "100 Pieces", sizes: "L | XL | XXL", colours: "5 Colours", fabric: "Cotton Knit" },
+      { code: "502", name: "Girls Casual Wear – Top + Pant Set", price: "₹185 / Piece", moq: "100 Pieces", sizes: "M | L | XL", colours: "5 Colours", fabric: "Bio-Wash Cotton" },
+      { code: "503", name: "Boys Printed T-Shirt & Track Pant", price: "₹175 / Piece", moq: "100 Pieces", sizes: "24 | 26 | 28 | 30", colours: "5 Colours", fabric: "100% Cotton" },
+      { code: "504", name: "Ladies Dailywear Lounge Set", price: "₹220 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "4 Colours", fabric: "Soft Rayon/Cotton" },
+      { code: "505", name: "Kids Unisex Cotton Loungewear", price: "₹160 / Piece", moq: "100 Pieces", sizes: "20 | 22 | 24 | 26 | 28", colours: "6 Colours", fabric: "Combed Cotton" },
+      { code: "506", name: "Mens Premium Round Neck T-Shirt", price: "₹145 / Piece", moq: "100 Pieces", sizes: "M | L | XL | XXL", colours: "6 Colours", fabric: "Single Jersey Cotton" },
+      { code: "507", name: "Girls Fancy Printed Top & Bottom Set", price: "₹190 / Piece", moq: "100 Pieces", sizes: "22 | 24 | 26 | 28 | 30", colours: "5 Colours", fabric: "Soft Hosiery Cotton" },
+      { code: "508", name: "Boys Summer Cotton Shorts & Tee Set", price: "₹165 / Piece", moq: "100 Pieces", sizes: "20 to 30", colours: "5 Colours", fabric: "100% Combed Cotton" },
+      { code: "509", name: "Ladies Collar Set – Top + Pant", price: "₹228 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "5 Colours", fabric: "Premium Cotton Blend" },
+      { code: "510", name: "Ladies Stone Work Set – Top + Pant", price: "₹228 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "5 Colours", fabric: "Textured Cotton Knit" },
+      { code: "511", name: "Kids Printed Set – Top + Pant", price: "₹124 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Ribbed Cotton" },
+      { code: "512", name: "Girls Puff Printed Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "Soft Hosiery" },
+      { code: "513", name: "Girls Stone Set – Top + Pant", price: "₹163 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Ribbed Hosiery Knit" },
+      { code: "514", name: "Boys Full Sleeve Set – Top + Pant", price: "₹140 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Slub Cotton Knit" },
+      { code: "515", name: "Boys Full Sleeve High Neck Set", price: "₹143 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Fleece / Winter Knit" },
+      { code: "516", name: "Girls Stone Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "Soft Hosiery" },
+      { code: "517", name: "Boys High Neck Set – Top + Pant", price: "₹130 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Cotton Loopknit" },
+      { code: "518", name: "Girls Half Sleeve Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "Combed Cotton" },
+      { code: "519", name: "Girls Half Sleeve Set – Top + Pant", price: "₹134 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "Self-Stripe Hosiery" },
+      { code: "520", name: "Boys Full Sleeve Set – Top + Pant", price: "₹130 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Waffle / Textured Knit" },
+      { code: "521", name: "Boys Full Sleeve Sports Set", price: "₹137 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Cotton Terry" },
+      { code: "522", name: "Girls Half Sleeve Set – Top + Pant", price: "₹134 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "Cotton Hosiery" },
+      { code: "523", name: "Girls All Over Print Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "AOP Cotton" },
+      { code: "524", name: "Unisex Set (Girls & Boys)", price: "₹195 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Heavy Track Terry" },
+      { code: "525", name: "Unisex Set (Girls & Boys)", price: "₹202 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Heavy Bio-Wash Cotton" },
+      { code: "526", name: "Unisex All Over Printed Set", price: "₹172 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Tie & Dye Cotton" },
+      { code: "527", name: "Boys Round Neck Set – Top + Pant", price: "₹124 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Slub Cotton Knit" },
+      { code: "528", name: "Mens Polo T-Shirt with Pocket", price: "₹199 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "4 Colours", fabric: "100% Cotton" }
     ];
 
-    const grid = document.getElementById('catalogueGrid');
+    async function loadCatalogueWithMedia() {
+      const grid = document.getElementById('catalogueGrid');
+      
+      let allImages = [];
+      let allVideos = [];
 
-    products.forEach((prod) => {
-      const card = document.createElement('div');
-      card.className = 'card';
+      try {
+        // GitHub API moolam unga repository-il ulla ella file names-aiyum direct-a edukirom
+        const res = await fetch("https://api.github.com/repos/Tiruppur-DR-Garments/dr-garments/contents/");
+        const files = await res.json();
+        
+        if (Array.isArray(files)) {
+          files.forEach(f => {
+            const name = f.name.toLowerCase();
+            if (name.endsWith('.jpg') || name.endsWith('.jpeg') || name.endsWith('.png') || name.endsWith('.webp')) {
+              if (!name.includes('logo') && !name.includes('1002366361')) {
+                allImages.push(f.download_url);
+              }
+            } else if (name.endsWith('.mp4') || name.endsWith('.webm') || name.endsWith('.mov')) {
+              allVideos.push(f.download_url);
+            }
+          });
+        }
+      } catch (e) {
+        console.error("API error, fallbacking:", e);
+      }
 
-      const waMsg = encodeURIComponent(`Hello DR Garments, I want to enquire about Code: ${prod.code} (${prod.name}).`);
+      grid.innerHTML = '';
 
-      card.innerHTML = `
-        <div class="img-box">
-          <img src="${BASE_RAW + prod.img}" 
-               onerror="this.src='./${prod.img}';" 
-               alt="${prod.name}" 
-               loading="lazy">
-        </div>
-        <div class="card-body">
-          <span class="code-badge">Code: ${prod.code}</span>
-          <h3 class="product-title">${prod.name}</h3>
-          <div class="price-row">
-            <span class="price">${prod.price}</span>
-            <span class="moq">Min: ${prod.moq}</span>
+      products.forEach((prod, pIdx) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        // Ovvoru product-kkum 5 images + 1 video分配 seigirom
+        let prodSlides = [];
+        const imgStart = (pIdx * 5) % Math.max(1, allImages.length);
+        
+        for (let i = 0; i < 5; i++) {
+          if (allImages.length > 0) {
+            prodSlides.push({ type: 'image', src: allImages[(imgStart + i) % allImages.length] });
+          }
+        }
+
+        if (allVideos.length > 0) {
+          prodSlides.push({ type: 'video', src: allVideos[pIdx % allVideos.length] });
+        }
+
+        let slidesHtml = prodSlides.map((s, sIdx) => {
+          const activeClass = sIdx === 0 ? 'active' : '';
+          if (s.type === 'video') {
+            return `
+              <div class="slide-item ${activeClass}">
+                <video controls playsinline preload="metadata">
+                  <source src="${s.src}" type="video/mp4">
+                </video>
+              </div>`;
+          } else {
+            return `
+              <div class="slide-item ${activeClass}">
+                <img src="${s.src}" alt="${prod.name}" loading="lazy">
+              </div>`;
+          }
+        }).join('');
+
+        const totalSlides = prodSlides.length;
+        const navHtml = totalSlides > 1 ? `
+          <button class="slider-btn prev" onclick="moveSlide(${pIdx}, -1)">&#10094;</button>
+          <button class="slider-btn next" onclick="moveSlide(${pIdx}, 1)">&#10095;</button>
+          <div class="slide-counter" id="counter-${pIdx}">1 / ${totalSlides}</div>
+        ` : '';
+
+        const waMsg = encodeURIComponent(`Hello DR Garments, I want to enquire about Code: ${prod.code} (${prod.name}).`);
+
+        card.innerHTML = `
+          <div class="slider-container" id="slider-${pIdx}">
+            ${slidesHtml}
+            ${navHtml}
           </div>
-          <table class="specs-table">
-            <tr><td>Sizes</td><td>${prod.sizes}</td></tr>
-            <tr><td>Colours</td><td>${prod.colours}</td></tr>
-            <tr><td>Fabric</td><td>${prod.fabric}</td></tr>
-          </table>
-          <a href="https://wa.me/919965655991?text=${waMsg}" target="_blank" class="btn-enquiry">
-            WhatsApp Enquiry
-          </a>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
+          <div class="card-body">
+            <span class="code-badge">Code: ${prod.code}</span>
+            <h3 class="product-title">${prod.name}</h3>
+            <div class="price-row">
+              <span class="price">${prod.price}</span>
+              <span class="moq">Min: ${prod.moq}</span>
+            </div>
+            <table class="specs-table">
+              <tr><td>Sizes</td><td>${prod.sizes}</td></tr>
+              <tr><td>Colours</td><td>${prod.colours}</td></tr>
+              <tr><td>Fabric</td><td>${prod.fabric}</td></tr>
+            </table>
+            <a href="https://wa.me/919965655991?text=${waMsg}" target="_blank" class="btn-enquiry">
+              WhatsApp Enquiry
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function moveSlide(pIdx, step) {
+      const box = document.getElementById(`slider-${pIdx}`);
+      const slides = box.querySelectorAll('.slide-item');
+      let cur = 0;
+      slides.forEach((s, idx) => { if (s.classList.contains('active')) cur = idx; });
+      slides[cur].classList.remove('active');
+      const curVid = slides[cur].querySelector('video');
+      if (curVid) curVid.pause();
+
+      let next = (cur + step + slides.length) % slides.length;
+      slides[next].classList.add('active');
+      document.getElementById(`counter-${pIdx}`).textContent = `${next + 1} / ${slides.length}`;
+    }
+
+    loadCatalogueWithMedia();
   </script>
 </body>
 </html>
