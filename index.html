@@ -31,7 +31,7 @@
       padding: 0.75rem 1.25rem;
     }
     .nav-container {
-      max-width: 1200px;
+      max-width: 900px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -41,18 +41,24 @@
     }
     .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-main); }
     
-    .brand-logo-img {
+    /* Perfect Embedded Circular Logo */
+    .brand-logo-wrap {
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
-      border: 1.5px solid #f59e0b;
-      background: #000;
+      border: 2px solid #f59e0b;
+      background: radial-gradient(circle, #0b1a30 0%, #050b14 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+      overflow: hidden;
+      flex-shrink: 0;
     }
+    .brand-logo-wrap svg { width: 100%; height: 100%; }
 
-    .brand-text h1 { font-size: 1.15rem; font-weight: 800; }
-    .brand-text p { font-size: 0.72rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .brand-text h1 { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.3px; }
+    .brand-text p { font-size: 0.72rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
     .header-badge {
       background: rgba(201, 24, 43, 0.15);
       border: 1px solid var(--primary);
@@ -64,18 +70,100 @@
       text-transform: uppercase;
     }
 
-    .hero { text-align: center; padding: 2rem 1rem 1rem; max-width: 800px; margin: 0 auto; }
-    .hero h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.4rem; color: #fff; }
-    .hero p { color: var(--text-muted); font-size: 0.92rem; }
+    .container { max-width: 520px; margin: 1.5rem auto; padding: 0 1rem; }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+    /* Login Modal Box */
+    .login-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .login-modal.active { display: flex; }
+    .login-card {
+      background: var(--surface);
+      border: 2px solid var(--accent);
+      border-radius: 14px;
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      text-align: center;
+    }
+    .login-card h3 { color: var(--accent); margin-bottom: 0.8rem; font-size: 1.2rem; }
+    .login-card input {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .login-btn-row { display: flex; gap: 0.6rem; }
+    .login-btn-row button {
+      flex: 1;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-submit-pass { background: #2563eb; color: #fff; }
+    .btn-cancel-pass { background: #374151; color: #fff; }
 
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.75rem;
+    /* Manager Form Box */
+    .manager-box {
+      display: none;
+      background: var(--surface);
+      border: 2px dashed var(--accent);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .manager-box.active { display: block; }
+    .manager-box h3 { color: var(--accent); font-size: 1.15rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+    .btn-logout { background: #ef4444; color: #fff; border: none; padding: 0.25rem 0.7rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.6rem; }
+    .form-grid input, .manager-box input[type="text"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 0.65rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      width: 100%;
+    }
+    .file-row {
+      margin: 0.8rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      background: rgba(0,0,0,0.3);
+      padding: 0.8rem;
+      border-radius: 8px;
+    }
+    .file-row label { font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+    .file-row input[type="file"] { font-size: 0.8rem; color: #cbd5e1; }
+    .btn-add {
+      width: 100%;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.95rem;
     }
 
+    /* Product Card */
     .card {
       background: var(--surface-card);
       border: 1px solid var(--border);
@@ -83,12 +171,13 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      margin-bottom: 2rem;
       box-shadow: 0 8px 24px rgba(0,0,0,0.5);
     }
     .slider-container {
       position: relative;
       width: 100%;
-      height: 420px;
+      height: 480px;
       background: #000;
       overflow: hidden;
       display: flex;
@@ -116,48 +205,55 @@
       background: rgba(15, 17, 23, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.3);
       color: #fff;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       z-index: 5;
     }
-    .slider-btn.prev { left: 8px; }
-    .slider-btn.next { right: 8px; }
+    .slider-btn.prev { left: 10px; }
+    .slider-btn.next { right: 10px; }
     .slide-counter {
       position: absolute;
-      bottom: 10px;
-      right: 10px;
+      bottom: 12px;
+      right: 12px;
       background: rgba(0, 0, 0, 0.8);
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: #fff;
     }
 
-    .card-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.65rem; flex-grow: 1; }
+    .card-body { padding: 1.3rem; display: flex; flex-direction: column; gap: 0.7rem; }
+    .top-meta { display: flex; justify-content: space-between; align-items: center; }
     .code-badge {
-      display: inline-block; align-self: flex-start;
       background: rgba(245, 158, 11, 0.15); color: var(--accent);
       border: 1px solid rgba(245, 158, 11, 0.4);
-      font-weight: 800; font-size: 0.82rem; padding: 0.2rem 0.6rem; border-radius: 6px;
+      font-weight: 800; font-size: 0.85rem; padding: 0.25rem 0.65rem; border-radius: 6px;
     }
-    .product-title { font-size: 1.05rem; font-weight: 700; color: #fff; line-height: 1.35; }
+    .btn-remove {
+      display: none;
+      background: #ef4444; color: #fff; border: none;
+      padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.8rem;
+      font-weight: 700; cursor: pointer;
+    }
+    .btn-remove.active { display: inline-block; }
+    .product-title { font-size: 1.25rem; font-weight: 700; color: #fff; line-height: 1.3; }
     .price-row { display: flex; justify-content: space-between; align-items: baseline; }
-    .price { font-size: 1.4rem; font-weight: 800; color: #4ade80; }
-    .moq { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; }
-    .specs-table { width: 100%; border-collapse: collapse; margin-top: 0.2rem; font-size: 0.85rem; }
-    .specs-table td { padding: 0.3rem 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
-    .specs-table td:first-child { color: var(--text-muted); width: 32%; }
+    .price { font-size: 1.5rem; font-weight: 800; color: #4ade80; }
+    .moq { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+    .specs-table { width: 100%; border-collapse: collapse; margin-top: 0.2rem; font-size: 0.88rem; }
+    .specs-table td { padding: 0.35rem 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .specs-table td:first-child { color: var(--text-muted); width: 35%; }
     .specs-table td:last-child { color: #fff; font-weight: 600; }
     
     .btn-enquiry {
-      margin-top: auto;
+      margin-top: 0.5rem;
       background: var(--whatsapp);
       color: #fff;
       text-decoration: none;
@@ -165,7 +261,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      padding: 0.75rem;
+      padding: 0.85rem;
       border-radius: 10px;
       font-size: 0.95rem;
       font-weight: 700;
@@ -174,18 +270,19 @@
     footer {
       text-align: center;
       margin-top: 3rem;
-      padding: 1.5rem;
       color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
     }
-    .loading-msg {
-      text-align: center;
-      grid-column: 1 / -1;
-      padding: 3rem;
+    .btn-admin-login {
+      background: transparent;
+      border: 1px solid var(--border);
       color: var(--accent);
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
       font-weight: 700;
-      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 0.8rem;
     }
   </style>
 </head>
@@ -194,10 +291,16 @@
   <header>
     <div class="nav-container">
       <a href="#" class="brand">
-        <img src="1002366361.png" 
-             class="brand-logo-img" 
-             alt="DR Garments"
-             onerror="this.src='https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002366361.png';">
+        <!-- Official DR Garments Logo Embedded Direct SVG -->
+        <div class="brand-logo-wrap">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="47" stroke="#f59e0b" stroke-width="3"/>
+            <path d="M26 30H46C55 30 60 35 60 43C60 51 55 56 46 56H36V70H26V30Z" fill="#1e40af"/>
+            <path d="M36 38H45C49 38 51 40 51 43C51 46 49 48 45 48H36V38Z" fill="#ffffff"/>
+            <path d="M50 42C52 35 58 30 68 30C78 30 83 36 83 44C83 51 78 56 70 57L84 70H71L60 58H58V70H48V42H50Z" fill="#f59e0b"/>
+            <path d="M58 38H67C71 38 73 40 73 44C73 47 71 50 67 50H58V38Z" fill="#ffffff"/>
+          </svg>
+        </div>
         <div class="brand-text">
           <h1>DR Garments</h1>
           <p>Tiruppur Wholesale</p>
@@ -207,104 +310,128 @@
     </div>
   </header>
 
-  <div class="hero">
-    <h2>Wholesale Product Catalogue</h2>
-    <p>Premium Quality Direct Factory Wholesale Supply • Minimum Order Quantity Applies</p>
-  </div>
-
-  <div class="container">
-    <div class="product-grid" id="catalogueGrid">
-      <div class="loading-msg">Loading Catalogue & Media...</div>
+  <!-- Login Modal Popup -->
+  <div class="login-modal" id="loginModal">
+    <div class="login-card">
+      <h3>Admin Access</h3>
+      <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:1rem;">Enter password to manage catalogue:</p>
+      <input type="password" id="passInput" placeholder="Password">
+      <div class="login-btn-row">
+        <button class="btn-cancel-pass" onclick="closeLoginModal()">Cancel</button>
+        <button class="btn-submit-pass" onclick="verifyPassword()">Login</button>
+      </div>
     </div>
   </div>
 
+  <div class="container">
+    <!-- Admin Manager Panel -->
+    <div class="manager-box" id="managerBox">
+      <h3>
+        <span>+ Add Product (Admin Mode)</span>
+        <button class="btn-logout" onclick="adminLogout()">Logout</button>
+      </h3>
+      <div class="form-grid">
+        <input type="text" id="inpCode" placeholder="Code (e.g. 529)">
+        <input type="text" id="inpPrice" placeholder="Price (e.g. ₹299 / Piece)">
+        <input type="text" id="inpSizes" placeholder="Sizes (e.g. S / M / L / XL / XXL)">
+        <input type="text" id="inpMoq" placeholder="MOQ (e.g. 100 Pieces)">
+        <input type="text" id="inpColours" placeholder="Colours (e.g. 24 Colours)">
+        <input type="text" id="inpFabric" placeholder="Fabric (e.g. MARS FABRIC)">
+      </div>
+      <input type="text" id="inpTitle" placeholder="Product Title" style="margin-bottom: 0.8rem;">
+
+      <div class="file-row">
+        <div>
+          <label>Select up to 5 Photos from Phone</label>
+          <input type="file" id="inpPhotos" accept="image/*" multiple>
+        </div>
+        <div>
+          <label>Select 1 Video from Phone</label>
+          <input type="file" id="inpVideo" accept="video/*">
+        </div>
+      </div>
+
+      <button class="btn-add" onclick="addProduct()">+ Add Product to Catalogue</button>
+    </div>
+
+    <!-- Product Display List -->
+    <div id="catalogueList"></div>
+  </div>
+
   <footer>
-    <p><strong>DR Garments</strong> • Tiruppur, Tamil Nadu</p>
-    <p>Bulk Supply Only • Phone / WhatsApp: 99656 55991</p>
+    <p>DR Garments • Tiruppur Wholesale</p>
+    <button class="btn-admin-login" onclick="openLoginModal()">🔒 Admin Login</button>
   </footer>
 
   <script>
-    const products = [
-      { code: "529", name: "Mens Polo T-Shirt (Premium Look)", price: "₹299 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "24 Colours", fabric: "MARS FABRIC" },
-      { code: "530", name: "Mens Polo T-Shirt", price: "₹240 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "9 Colours", fabric: "MARS FABRIC" },
-      { code: "501", name: "Ladies Nightwear Set – Top + Pant", price: "₹215 / Piece", moq: "100 Pieces", sizes: "L | XL | XXL", colours: "5 Colours", fabric: "Cotton Knit" },
-      { code: "502", name: "Girls Casual Wear – Top + Pant Set", price: "₹185 / Piece", moq: "100 Pieces", sizes: "M | L | XL", colours: "5 Colours", fabric: "Bio-Wash Cotton" },
-      { code: "503", name: "Boys Printed T-Shirt & Track Pant", price: "₹175 / Piece", moq: "100 Pieces", sizes: "24 | 26 | 28 | 30", colours: "5 Colours", fabric: "100% Cotton" },
-      { code: "504", name: "Ladies Dailywear Lounge Set", price: "₹220 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "4 Colours", fabric: "Soft Rayon/Cotton" },
-      { code: "505", name: "Kids Unisex Cotton Loungewear", price: "₹160 / Piece", moq: "100 Pieces", sizes: "20 | 22 | 24 | 26 | 28", colours: "6 Colours", fabric: "Combed Cotton" },
-      { code: "506", name: "Mens Premium Round Neck T-Shirt", price: "₹145 / Piece", moq: "100 Pieces", sizes: "M | L | XL | XXL", colours: "6 Colours", fabric: "Single Jersey Cotton" },
-      { code: "507", name: "Girls Fancy Printed Top & Bottom Set", price: "₹190 / Piece", moq: "100 Pieces", sizes: "22 | 24 | 26 | 28 | 30", colours: "5 Colours", fabric: "Soft Hosiery Cotton" },
-      { code: "508", name: "Boys Summer Cotton Shorts & Tee Set", price: "₹165 / Piece", moq: "100 Pieces", sizes: "20 to 30", colours: "5 Colours", fabric: "100% Combed Cotton" },
-      { code: "509", name: "Ladies Collar Set – Top + Pant", price: "₹228 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "5 Colours", fabric: "Premium Cotton Blend" },
-      { code: "510", name: "Ladies Stone Work Set – Top + Pant", price: "₹228 / Piece", moq: "100 Pieces", sizes: "XL | 2XL | 3XL", colours: "5 Colours", fabric: "Textured Cotton Knit" },
-      { code: "511", name: "Kids Printed Set – Top + Pant", price: "₹124 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Ribbed Cotton" },
-      { code: "512", name: "Girls Puff Printed Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "Soft Hosiery" },
-      { code: "513", name: "Girls Stone Set – Top + Pant", price: "₹163 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Ribbed Hosiery Knit" },
-      { code: "514", name: "Boys Full Sleeve Set – Top + Pant", price: "₹140 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Slub Cotton Knit" },
-      { code: "515", name: "Boys Full Sleeve High Neck Set", price: "₹143 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Fleece / Winter Knit" },
-      { code: "516", name: "Girls Stone Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "Soft Hosiery" },
-      { code: "517", name: "Boys High Neck Set – Top + Pant", price: "₹130 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Cotton Loopknit" },
-      { code: "518", name: "Girls Half Sleeve Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "Combed Cotton" },
-      { code: "519", name: "Girls Half Sleeve Set – Top + Pant", price: "₹134 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "Self-Stripe Hosiery" },
-      { code: "520", name: "Boys Full Sleeve Set – Top + Pant", price: "₹130 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Waffle / Textured Knit" },
-      { code: "521", name: "Boys Full Sleeve Sports Set", price: "₹137 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Cotton Terry" },
-      { code: "522", name: "Girls Half Sleeve Set – Top + Pant", price: "₹134 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "Cotton Hosiery" },
-      { code: "523", name: "Girls All Over Print Set – Top + Pant", price: "₹137 / Piece", moq: "100 Pieces", sizes: "S to 4XL", colours: "5 Colours", fabric: "AOP Cotton" },
-      { code: "524", name: "Unisex Set (Girls & Boys)", price: "₹195 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Heavy Track Terry" },
-      { code: "525", name: "Unisex Set (Girls & Boys)", price: "₹202 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Heavy Bio-Wash Cotton" },
-      { code: "526", name: "Unisex All Over Printed Set", price: "₹172 / Piece", moq: "100 Pieces", sizes: "2 to 12", colours: "5 Colours", fabric: "Tie & Dye Cotton" },
-      { code: "527", name: "Boys Round Neck Set – Top + Pant", price: "₹124 / Piece", moq: "100 Pieces", sizes: "40 to 65", colours: "5 Colours", fabric: "Slub Cotton Knit" },
-      { code: "528", name: "Mens Polo T-Shirt with Pocket", price: "₹199 / Piece", moq: "100 Pieces", sizes: "S / M / L / XL / XXL", colours: "4 Colours", fabric: "100% Cotton" }
+    const ADMIN_KEY = "Sg0808";
+    let isAdminLoggedIn = false;
+
+    // Check URL param ?admin=true
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('admin') === 'true') {
+      setTimeout(() => { openLoginModal(); }, 300);
+    }
+
+    const defaultCatalogue = [
+      {
+        id: "prod_529",
+        code: "529",
+        title: "Mens Polo T-Shirt (Premium Look)",
+        price: "₹299 / Piece",
+        moq: "100 Pieces",
+        sizes: "S / M / L / XL / XXL",
+        colours: "24 Colours",
+        fabric: "MARS FABRIC",
+        slides: [
+          { type: 'image', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002372112.png' },
+          { type: 'image', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002372104.png' },
+          { type: 'image', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002372113.png' },
+          { type: 'image', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002372114.png' },
+          { type: 'video', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002373579.mp4' }
+        ]
+      }
     ];
 
-    async function loadCatalogueWithMedia() {
-      const grid = document.getElementById('catalogueGrid');
-      
-      let allImages = [];
-      let allVideos = [];
+    let catalogueData = JSON.parse(localStorage.getItem('dr_saved_products')) || defaultCatalogue;
 
-      try {
-        // GitHub API moolam unga repository-il ulla ella file names-aiyum direct-a edukirom
-        const res = await fetch("https://api.github.com/repos/Tiruppur-DR-Garments/dr-garments/contents/");
-        const files = await res.json();
-        
-        if (Array.isArray(files)) {
-          files.forEach(f => {
-            const name = f.name.toLowerCase();
-            if (name.endsWith('.jpg') || name.endsWith('.jpeg') || name.endsWith('.png') || name.endsWith('.webp')) {
-              if (!name.includes('logo') && !name.includes('1002366361')) {
-                allImages.push(f.download_url);
-              }
-            } else if (name.endsWith('.mp4') || name.endsWith('.webm') || name.endsWith('.mov')) {
-              allVideos.push(f.download_url);
-            }
-          });
-        }
-      } catch (e) {
-        console.error("API error, fallbacking:", e);
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.add('active');
+      document.getElementById('passInput').value = '';
+      document.getElementById('passInput').focus();
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('active');
+    }
+
+    function verifyPassword() {
+      const p = document.getElementById('passInput').value;
+      if (p === ADMIN_KEY) {
+        isAdminLoggedIn = true;
+        closeLoginModal();
+        document.getElementById('managerBox').classList.add('active');
+        renderCards();
+      } else {
+        alert("Incorrect password!");
       }
+    }
 
-      grid.innerHTML = '';
+    function adminLogout() {
+      isAdminLoggedIn = false;
+      document.getElementById('managerBox').classList.remove('active');
+      renderCards();
+    }
 
-      products.forEach((prod, pIdx) => {
+    function renderCards() {
+      const target = document.getElementById('catalogueList');
+      target.innerHTML = '';
+
+      catalogueData.forEach((item, pIdx) => {
         const card = document.createElement('div');
         card.className = 'card';
 
-        // Ovvoru product-kkum 5 images + 1 video分配 seigirom
-        let prodSlides = [];
-        const imgStart = (pIdx * 5) % Math.max(1, allImages.length);
-        
-        for (let i = 0; i < 5; i++) {
-          if (allImages.length > 0) {
-            prodSlides.push({ type: 'image', src: allImages[(imgStart + i) % allImages.length] });
-          }
-        }
-
-        if (allVideos.length > 0) {
-          prodSlides.push({ type: 'video', src: allVideos[pIdx % allVideos.length] });
-        }
-
-        let slidesHtml = prodSlides.map((s, sIdx) => {
+        let slidesHtml = item.slides.map((s, sIdx) => {
           const activeClass = sIdx === 0 ? 'active' : '';
           if (s.type === 'video') {
             return `
@@ -316,19 +443,20 @@
           } else {
             return `
               <div class="slide-item ${activeClass}">
-                <img src="${s.src}" alt="${prod.name}" loading="lazy">
+                <img src="${s.src}" alt="${item.title}" onerror="this.src='./${s.src}';">
               </div>`;
           }
         }).join('');
 
-        const totalSlides = prodSlides.length;
-        const navHtml = totalSlides > 1 ? `
+        const total = item.slides.length;
+        const navHtml = total > 1 ? `
           <button class="slider-btn prev" onclick="moveSlide(${pIdx}, -1)">&#10094;</button>
           <button class="slider-btn next" onclick="moveSlide(${pIdx}, 1)">&#10095;</button>
-          <div class="slide-counter" id="counter-${pIdx}">1 / ${totalSlides}</div>
+          <div class="slide-counter" id="counter-${pIdx}">1 / ${total}</div>
         ` : '';
 
-        const waMsg = encodeURIComponent(`Hello DR Garments, I want to enquire about Code: ${prod.code} (${prod.name}).`);
+        const removeBtnClass = isAdminLoggedIn ? 'btn-remove active' : 'btn-remove';
+        const waUrl = "https://wa.me/919965655991?text=" + encodeURIComponent(`Hello DR Garments, enquiry for Code: ${item.code} (${item.title})`);
 
         card.innerHTML = `
           <div class="slider-container" id="slider-${pIdx}">
@@ -336,41 +464,118 @@
             ${navHtml}
           </div>
           <div class="card-body">
-            <span class="code-badge">Code: ${prod.code}</span>
-            <h3 class="product-title">${prod.name}</h3>
+            <div class="top-meta">
+              <span class="code-badge">Code: ${item.code}</span>
+              <button class="${removeBtnClass}" onclick="removeCard('${item.id}')">Remove</button>
+            </div>
+            <h3 class="product-title">${item.title}</h3>
             <div class="price-row">
-              <span class="price">${prod.price}</span>
-              <span class="moq">Min: ${prod.moq}</span>
+              <span class="price">${item.price}</span>
+              <span class="moq">Min: ${item.moq}</span>
             </div>
             <table class="specs-table">
-              <tr><td>Sizes</td><td>${prod.sizes}</td></tr>
-              <tr><td>Colours</td><td>${prod.colours}</td></tr>
-              <tr><td>Fabric</td><td>${prod.fabric}</td></tr>
+              <tr><td>Sizes</td><td>${item.sizes}</td></tr>
+              <tr><td>Colours</td><td>${item.colours}</td></tr>
+              <tr><td>Fabric</td><td>${item.fabric}</td></tr>
             </table>
-            <a href="https://wa.me/919965655991?text=${waMsg}" target="_blank" class="btn-enquiry">
-              WhatsApp Enquiry
-            </a>
+            <a href="${waUrl}" target="_blank" class="btn-enquiry">WhatsApp Enquiry</a>
           </div>
         `;
-        grid.appendChild(card);
+        target.appendChild(card);
       });
     }
 
     function moveSlide(pIdx, step) {
       const box = document.getElementById(`slider-${pIdx}`);
       const slides = box.querySelectorAll('.slide-item');
-      let cur = 0;
-      slides.forEach((s, idx) => { if (s.classList.contains('active')) cur = idx; });
-      slides[cur].classList.remove('active');
-      const curVid = slides[cur].querySelector('video');
+      let current = 0;
+      slides.forEach((s, idx) => { if (s.classList.contains('active')) current = idx; });
+      slides[current].classList.remove('active');
+      const curVid = slides[current].querySelector('video');
       if (curVid) curVid.pause();
 
-      let next = (cur + step + slides.length) % slides.length;
+      let next = (current + step + slides.length) % slides.length;
       slides[next].classList.add('active');
       document.getElementById(`counter-${pIdx}`).textContent = `${next + 1} / ${slides.length}`;
     }
 
-    loadCatalogueWithMedia();
+    function fileToDataUrl(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function addProduct() {
+      const code = document.getElementById('inpCode').value;
+      const title = document.getElementById('inpTitle').value;
+      const price = document.getElementById('inpPrice').value;
+      const moq = document.getElementById('inpMoq').value;
+      const sizes = document.getElementById('inpSizes').value;
+      const colours = document.getElementById('inpColours').value;
+      const fabric = document.getElementById('inpFabric').value;
+
+      if (!code || !title) {
+        alert("Please enter Product Code and Title!");
+        return;
+      }
+
+      const pFiles = document.getElementById('inpPhotos').files;
+      const vFiles = document.getElementById('inpVideo').files;
+
+      let newSlides = [];
+
+      for (let i = 0; i < Math.min(pFiles.length, 5); i++) {
+        const b64 = await fileToDataUrl(pFiles[i]);
+        newSlides.push({ type: 'image', src: b64 });
+      }
+
+      if (vFiles.length > 0) {
+        const vidB64 = await fileToDataUrl(vFiles[0]);
+        newSlides.push({ type: 'video', src: vidB64 });
+      }
+
+      if (newSlides.length === 0) {
+        newSlides.push({ type: 'image', src: 'https://raw.githubusercontent.com/Tiruppur-DR-Garments/dr-garments/main/1002372112.png' });
+      }
+
+      const newProduct = {
+        id: "p_" + Date.now(),
+        code, title, price, moq, sizes, colours, fabric,
+        slides: newSlides
+      };
+
+      catalogueData.unshift(newProduct);
+      try {
+        localStorage.setItem('dr_saved_products', JSON.stringify(catalogueData));
+      } catch (e) {}
+
+      renderCards();
+      alert("Product added successfully!");
+
+      document.getElementById('inpCode').value = '';
+      document.getElementById('inpTitle').value = '';
+      document.getElementById('inpPrice').value = '';
+      document.getElementById('inpSizes').value = '';
+      document.getElementById('inpMoq').value = '';
+      document.getElementById('inpColours').value = '';
+      document.getElementById('inpFabric').value = '';
+      document.getElementById('inpPhotos').value = '';
+      document.getElementById('inpVideo').value = '';
+    }
+
+    function removeCard(id) {
+      if (confirm("Remove this product?")) {
+        catalogueData = catalogueData.filter(x => x.id !== id);
+        try {
+          localStorage.setItem('dr_saved_products', JSON.stringify(catalogueData));
+        } catch (e) {}
+        renderCards();
+      }
+    }
+
+    renderCards();
   </script>
 </body>
 </html>
